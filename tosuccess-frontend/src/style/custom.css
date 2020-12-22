@@ -1,0 +1,10 @@
+.page-container{
+    padding-left: 5vw;
+    padding: 2vh;
+    width:100%;
+    align-content: center;
+}
+
+.activity-name{
+    font-size: 2em;
+}

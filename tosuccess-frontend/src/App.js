@@ -1,5 +1,5 @@
-import './App.css';
-import './style/bootstrap.css'
+import './style/bootstrap.css';
+import './style/custom.css';
 
 
 
@@ -13,7 +13,9 @@ function App() {
   return (
     <div>
       <NavBar />
-      <Routes />
+      <div className="page-container">
+        <Routes />
+      </div>
     </div>
   );
 }

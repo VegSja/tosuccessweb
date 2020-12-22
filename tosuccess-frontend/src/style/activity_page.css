@@ -1,0 +1,15 @@
+/**For tables**/
+th{
+    border-color: white;
+    border-top: 0px;
+    text-align: center;
+}
+
+.activity-card{
+    margin-top: 1vw;
+}
+
+.add-button{
+    position: absolute;
+    right: 1vw;
+}

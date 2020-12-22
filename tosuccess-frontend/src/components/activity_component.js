@@ -40,6 +40,7 @@ class ActivityComponent extends Component{
     render(){
         return(
             <div>
+                <h1>Activities</h1>
                 {/* The rest of the page */}
                 <ActivityTable />
                 <AddActivityButton handleClick={() => this.handleModalShowHide()} />

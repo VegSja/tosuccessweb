@@ -11,12 +11,9 @@ import Routes from "./Routes";
 
 function App() {
   return (
-    <div>
-      <NavBar />
-      <div className="page-container">
+      <div>
         <Routes />
       </div>
-    </div>
   );
 }
 

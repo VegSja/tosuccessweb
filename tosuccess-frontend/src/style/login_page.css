@@ -1,0 +1,15 @@
+.login-img{
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    mix-blend-mode: normal;
+}
+
+.page-contain{
+    height: 100vh;
+}
+
+.content-left{
+    padding: 1vw;
+    padding-top: 10vh;
+}

@@ -1,6 +1,9 @@
 import React from "react";
 import { Route, Switch } from "react-router-dom";
 
+//Navbar import
+import NavBar from './components/navbar';
+
 //Container imports
 import Login from './containers/login';
 import Activities from './containers/activities';
@@ -14,13 +17,22 @@ export default function Routes() {
           <Login />
         </Route>
         <Route exact path="/activities">
-          <Activities />
+          <NavBar />
+          <div className="page-container">
+            <Activities />
+          </div>
         </Route>
         <Route exact path="/stats">
-          <Stats />
+          <NavBar />
+          <div className="page-container">
+            <Stats />
+          </div>
         </Route>
         <Route exact path="/settings">
-          <Settings />
+          <NavBar />
+          <div className="page-container">
+            <Settings />
+          </div>
         </Route>
     </Switch>
   );

@@ -5,7 +5,7 @@ import { Route, Switch } from "react-router-dom";
 import NavBar from './components/navbar';
 
 //Container imports
-import Login from './containers/login';
+import Landing from './containers/landing';
 import Activities from './containers/activities';
 import Stats from './containers/stats';
 import Settings from './containers/settings';
@@ -14,7 +14,7 @@ export default function Routes() {
   return (
     <Switch>
         <Route exact path="/login">
-          <Login />
+          <Landing />
         </Route>
         <Route exact path="/activities">
           <NavBar />

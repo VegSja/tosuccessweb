@@ -9,6 +9,7 @@ import Landing from './containers/landing';
 import Activities from './containers/activities';
 import Stats from './containers/stats';
 import Settings from './containers/settings';
+import ActivityComponent from './components/activity_component';
 
 export default function Routes() {
   return (
@@ -19,7 +20,7 @@ export default function Routes() {
         <Route exact path="/activities">
           <NavBar />
           <div className="page-container">
-            <Activities />
+            <ActivityComponent />
           </div>
         </Route>
         <Route exact path="/stats">

@@ -8,12 +8,16 @@ import {Button, Modal, Form} from 'react-bootstrap';
 import {React, Component} from 'react';
 import { FormGroup } from '@material-ui/core';
 
+//Routing
+import { withRouter } from "react-router";
+import PropTypes from "prop-types";
+
 //TODO: Change format of date so that backends accepts
 
 class ActivityComponent extends Component{
 
-    constructor(){
-        super();
+    constructor(props){
+        super(props);
         this.state = {
             activityName : "",
             activityDate : "",
@@ -22,7 +26,6 @@ class ActivityComponent extends Component{
             showHide : false
         }
     }
-
     //Handle input in fab
     handleModalShowHide() {
         this.setState({ showHide: !this.state.showHide })
@@ -38,9 +41,10 @@ class ActivityComponent extends Component{
     }
 
     render(){
+        console.log("Props: ", this.props.location)
         return(
             <div>
-                <h1>Activities</h1>
+                <h1>Hello {this.props.location.state.name}, here is your activities!</h1>
                 {/* The rest of the page */}
                 <ActivityTable />
                 <AddActivityButton handleClick={() => this.handleModalShowHide()} />
@@ -87,4 +91,4 @@ class ActivityComponent extends Component{
     
 }
 
-export default ActivityComponent;
+export default withRouter(ActivityComponent);

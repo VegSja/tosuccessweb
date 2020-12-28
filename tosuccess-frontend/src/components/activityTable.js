@@ -31,17 +31,17 @@ export default class ActivityTable extends Component{
     }
     //Creates 'dict' with data from JSON
     CreateActivityObject(activities_json){
-        sort_array_based_on_key(activities_json, "date"); //Sorts activities based on start time. This way we have the dates in order
+        sort_array_based_on_key(activities_json, "date_string"); //Sorts activities based on start time. This way we have the dates in order
         var activities = {};
         for(var i=0; i<activities_json.length; i++){
-            if (!(activities_json[i].date in activities)){
-                activities[activities_json[i].date] = [];
+            if (!(activities_json[i].date_string in activities)){
+                activities[activities_json[i].date_string] = [];
             }
-            activities[activities_json[i].date].push(activities_json[i]);
+            activities[activities_json[i].date_string].push(activities_json[i]);
         }
         
-        for(const date in activities){
-            sort_array_based_on_key(activities[date], "start_time"); //Sorts the start time of each activity on a given date.
+        for(const date_string in activities){
+            sort_array_based_on_key(activities[date_string], "start_time"); //Sorts the start time of each activity on a given date.
         }
         return activities;
     }

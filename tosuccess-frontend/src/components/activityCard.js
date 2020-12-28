@@ -3,16 +3,24 @@ import {React, Component} from 'react';
 //Bootstrap imports
 import {Card} from 'react-bootstrap';
 
+//Other imports
+import DateHandler from '../other/dateHandler';
+
+
 export default class ActivityCard extends Component{
     constructor(props){
         super(props);
+        const dateHandler = new DateHandler();
+        this.start_time = dateHandler.timeConvert(this.props.start_time)
+        this.end_time = dateHandler.timeConvert(this.props.end_time)
     }
+
 
     render(){
         return(
             <Card className="activity-card">
             <Card.Body>
-                <Card.Title>{this.props.start_time} - {this.props.end_time}</Card.Title>
+                <Card.Title>{this.start_time} - {this.end_time}</Card.Title>
                 <Card.Subtitle className="activity-name">{this.props.activity_name}</Card.Subtitle>
             </Card.Body>
             </Card>

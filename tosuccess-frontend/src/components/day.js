@@ -26,7 +26,7 @@ export default class Day extends Component{
     createJSXItems(activities_array){
         const items = []
         for(const activity of activities_array){
-            items.push(<tr><ActivityCard activity_name={activity.activity_name} start_time={activity.start_time} end_time={activity.end_time} /> </tr>);
+            items.push(<tr><ActivityCard activity_name={activity.activity_name} start_time={activity.minutes_after_midnight_start} end_time={activity.minutes_after_midnight_end} /> </tr>);
         }
         return items;
     }

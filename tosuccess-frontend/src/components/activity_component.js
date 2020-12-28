@@ -65,7 +65,7 @@ class ActivityComponent extends Component{
             <div>
                 <h1>Hello NAME, here is your activities!</h1>
                 {/* The rest of the page */}
-                {this.state.loading ? <Spinner animation="grow" size="lg" /> :  <ActivityTable activitiesson={this.activities} /> }
+                {this.state.loading ? <Spinner animation="grow" /> :  <ActivityTable activitiesson={this.activities} /> }
                 <AddActivityButton handleClick={() => this.handleModalShowHide()} />
 
                 {/* Modal */}

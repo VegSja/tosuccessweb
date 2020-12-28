@@ -30,7 +30,7 @@ export default class NavBar extends Component{
                     </LinkContainer>
                 </Nav>
                 <Form inline>
-                    <LinkContainer to="/login">
+                    <LinkContainer to="/landing">
                         <Button type="button" className="btn btn-danger">Log out</Button>
                     </LinkContainer>
                 </Form>

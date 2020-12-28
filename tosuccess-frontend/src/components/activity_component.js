@@ -1,19 +1,20 @@
 import ActivityTable from '../components/activityTable';
 import AddActivityButton from '../components/add_activity_button';
-import DatePicker from "../components/datepicker";
-import TimePickerBootstrap from "../components/timepicker";
 
-import {Button, Modal, Form} from 'react-bootstrap';
+import {Button, Modal, Form, Spinner} from 'react-bootstrap';
 
 import {React, Component} from 'react';
 import { FormGroup } from '@material-ui/core';
 
 //Routing
 import { withRouter } from "react-router";
-import PropTypes from "prop-types";
+import { Redirect } from "react-router-dom";
+
+//Non-react classes
+import test_access_to_backend from "../other/sessionHandler"
+import API_Connection from "../other/API_connection"
 
 //TODO: Change format of date so that backends accepts
-
 class ActivityComponent extends Component{
 
     constructor(props){
@@ -23,8 +24,27 @@ class ActivityComponent extends Component{
             activityDate : "",
             activityStartTime : "",
             activityEndTime : "",
-            showHide : false
+            showHide : false,
+            loading : true,
         }
+        if ((this.props.location.state) == undefined) {
+            this.props.history.push('/landing');
+            return
+        }
+        test_access_to_backend(this.props.location.state.backend_access_token);
+        const api_connection = new API_Connection(this.props.location.state.backend_access_token);
+
+        //API connection data retrieval
+        api_connection.get_current_date().then((response) => {
+            this.currentdate = api_connection.date;
+            console.log(this.currentdate);
+        });
+
+        api_connection.get_activities().then((response) => {
+            this.activities = api_connection.activities;
+            console.log(this.activities);
+            this.setState({ loading: false });
+        });
     }
     //Handle input in fab
     handleModalShowHide() {
@@ -41,12 +61,11 @@ class ActivityComponent extends Component{
     }
 
     render(){
-        console.log("Props: ", this.props.location)
         return(
             <div>
-                <h1>Hello {this.props.location.state.name}, here is your activities!</h1>
+                <h1>Hello NAME, here is your activities!</h1>
                 {/* The rest of the page */}
-                <ActivityTable />
+                {this.state.loading ? <Spinner animation="grow" size="lg" /> :  <ActivityTable activitiesson={this.activities} /> }
                 <AddActivityButton handleClick={() => this.handleModalShowHide()} />
 
                 {/* Modal */}

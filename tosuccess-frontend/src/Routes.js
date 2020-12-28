@@ -6,7 +6,6 @@ import NavBar from './components/navbar';
 
 //Container imports
 import Landing from './containers/landing';
-import Activities from './containers/activities';
 import Stats from './containers/stats';
 import Settings from './containers/settings';
 import ActivityComponent from './components/activity_component';
@@ -14,7 +13,7 @@ import ActivityComponent from './components/activity_component';
 export default function Routes() {
   return (
     <Switch>
-        <Route exact path="/login">
+        <Route exact path="/landing">
           <Landing />
         </Route>
         <Route exact path="/activities">

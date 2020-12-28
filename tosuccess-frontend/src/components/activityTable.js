@@ -7,17 +7,6 @@ import Day from './day';
 
 import "../style/activity_page.css"
 
-var activitiesson = [
-    {date : "07.11.2020", activity_name : 'Halla', start_time : "13.00", end_time : "14.00"},
-    {date : "07.11.2020", activity_name : 'Lol', start_time : "14.00", end_time : "15.00"},
-    {date : "09.11.2020", activity_name : 'Skole', start_time : "10.00", end_time : "12.00"},
-    {date : "07.11.2020", activity_name : 'Skole', start_time : "08.00", end_time : "12.00"},
-    {date : "07.11.2020", activity_name : 'Skole', start_time : "08.00", end_time : "12.00"},
-    {date : "07.11.2020", activity_name : 'Skole', start_time : "08.00", end_time : "12.00"},
-    {date : "07.11.2020", activity_name : 'Skole', start_time : "08.00", end_time : "12.00"},
-    {date : "08.11.2020", activity_name : 'Åse', start_time : "20.00", end_time : "21.00"},
-];
-
 function sort_array_based_on_key(array, key){
     return array.sort( function(a,b) {
         var x = a[key];
@@ -30,6 +19,7 @@ function sort_array_based_on_key(array, key){
 export default class ActivityTable extends Component{
     constructor(props){
         super(props)
+        this.activitiesson = this.props.activitiesson
     }
 
     render(){
@@ -58,7 +48,7 @@ export default class ActivityTable extends Component{
 
     //Use create a activity card based on data from object
     renderDays(){
-        var activities = this.CreateActivityObject(activitiesson);
+        var activities = this.CreateActivityObject(this.activitiesson);
         var items = [];
         for(const key in activities){
             items.push(<th><Day date={key} activities_for_day={activities[key]}/></th>);

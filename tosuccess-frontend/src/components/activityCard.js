@@ -12,7 +12,7 @@ export default class ActivityCard extends Component{
         return(
             <Card className="activity-card">
             <Card.Body>
-        <Card.Title>{this.props.start_time} - {this.props.end_time}</Card.Title>
+                <Card.Title>{this.props.start_time} - {this.props.end_time}</Card.Title>
                 <Card.Subtitle className="activity-name">{this.props.activity_name}</Card.Subtitle>
             </Card.Body>
             </Card>

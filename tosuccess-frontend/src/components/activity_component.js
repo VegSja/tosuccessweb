@@ -13,12 +13,14 @@ import { Redirect } from "react-router-dom";
 //Non-react classes
 import test_access_to_backend from "../other/sessionHandler"
 import API_Connection from "../other/API_connection"
+import DateHandler from "../other/dateHandler"
 
 //TODO: Change format of date so that backends accepts
 class ActivityComponent extends Component{
 
     constructor(props){
         super(props);
+
         this.state = {
             activityName : "",
             activityDate : "",
@@ -26,26 +28,24 @@ class ActivityComponent extends Component{
             activityEndTime : "",
             showHide : false,
             loading : true,
-        }
-        if ((this.props.location.state) == undefined) {
-            this.props.history.push('/landing');
-            return
-        }
-        test_access_to_backend(this.props.location.state.backend_access_token);
-        const api_connection = new API_Connection(this.props.location.state.backend_access_token);
 
-        //API connection data retrieval
-        api_connection.get_current_date().then((response) => {
-            this.currentdate = api_connection.date;
-            console.log(this.currentdate);
-        });
+            backend_access_token: null,
+        }
 
-        api_connection.get_activities().then((response) => {
-            this.activities = api_connection.activities;
-            console.log(this.activities);
-            this.setState({ loading: false });
-        });
+        let routeState;
+        if(this.props.location.state){
+            localStorage.setItem('routeState', JSON.stringify(this.props.location.state));
+            routeState = this.props.location.state;
+        } else {
+            routeState = localStorage.getItem('routeState');
+            if(routeState) routeState = JSON.parse(routeState);
+        }
+        this.state.backend_access_token = routeState.backend_access_token; //Does this to avoid update of page
+
+        this.api_connection = new API_Connection(this.state.backend_access_token); //We still keep this object and pass it into the table. Still need it to post
+        this.dateHandler = new DateHandler();
     }
+
     //Handle input in fab
     handleModalShowHide() {
         this.setState({ showHide: !this.state.showHide })
@@ -57,7 +57,9 @@ class ActivityComponent extends Component{
                 "\n Date:" + this.state.activityDate +
                 "\n Start Time: " + this.state.activityStartTime +
                 "\n End Time: " + this.state.activityEndTime);
-        this.handleModalShowHide();
+        this.api_connection.post_activity(this.state.activityName, 0, 0, 363, this.dateHandler.convertDateToDDMMMMYYYY(this.state.activityDate));
+        this.handleModalShowHide(); //Possible solution for reloading. When setState is called the entire constructor gets called again. When this happens this.props.location.state is undefined.
+                                    //Solution: Set new state with information you het from this.props.location state and chekc if these are correct. If not then push to /landing
     }
 
     render(){
@@ -65,7 +67,7 @@ class ActivityComponent extends Component{
             <div>
                 <h1>Hello NAME, here is your activities!</h1>
                 {/* The rest of the page */}
-                {this.state.loading ? <Spinner animation="grow" /> :  <ActivityTable activitiesson={this.activities} /> }
+                <ActivityTable backendAccessToken={this.state.backend_access_token} api_connection={this.api_connection} />
                 <AddActivityButton handleClick={() => this.handleModalShowHide()} />
 
                 {/* Modal */}

@@ -16,6 +16,9 @@ export default function Routes() {
         <Route exact path="/landing">
           <Landing />
         </Route>
+        <Route exact path="/">
+          <Landing></Landing>
+        </Route>
         <Route exact path="/activities">
           <NavBar />
           <div className="page-container">

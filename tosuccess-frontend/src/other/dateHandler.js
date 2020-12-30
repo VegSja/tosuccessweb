@@ -70,4 +70,24 @@ export default class DateHandler{
         }
         return day + ". " + month + " " + year;
     }
+
+    convertDateToDayNumber(date){
+        var date_data = date.split('-')
+        var day = parseInt(date_data[2]); 
+        var month = parseInt(date_data[1]);
+        var year = parseInt(date_data[0]);
+
+        var calc_date = new Date(year, month-1, day);
+        var start_date = new Date(calc_date.getFullYear(), 0, 0)
+
+        var dayNumber = Math.floor((calc_date - start_date) / 1000 / 60 / 60 / 24);
+        return dayNumber;
+    }
+
+    convertTimeToMinutes(time){
+        var time_data = time.split(":")
+        var hours = parseInt(time_data[0]);
+        var minutes = parseInt(time_data[1]);
+        return hours*60 + minutes
+    }
 }

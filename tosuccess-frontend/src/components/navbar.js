@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 
 //Bootstrap imports
 import {Nav, Navbar, Form, Button} from 'react-bootstrap';
+import Logout from './logout';
 
 //Routing imports
 import { LinkContainer } from "react-router-bootstrap";
@@ -31,7 +32,7 @@ export default class NavBar extends Component{
                 </Nav>
                 <Form inline>
                     <LinkContainer to="/landing">
-                        <Button type="button" className="btn btn-danger">Log out</Button>
+                        <Logout />
                     </LinkContainer>
                 </Form>
             </Navbar>

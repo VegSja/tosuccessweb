@@ -19,9 +19,9 @@ export default class API_Connection {
             return(this.date)
         })
     }
-
-    async get_activities(){
-        const res = await axios.get(this.url_activities, {
+    // + "?date="+ date.toString() + "?nb_days=2"
+    async get_activities(date, nb_days=2){
+        const res = await axios.get(this.url_activities + "?date="+ date.toString() + "&nb_days=" + nb_days.toString(), {
             headers: {
                 "Authorization": `Bearer ${this.token}`
             }
@@ -40,7 +40,6 @@ export default class API_Connection {
             date: dayNumber,
             date_string: date_string,
         }
-        console.log("Sending JSON: ", data);
         const res = await axios.post(this.url_activities, data, {
             'Content-Type': 'text/json',
             headers: {
@@ -48,7 +47,7 @@ export default class API_Connection {
             }
         })
         .then((res) => {
-            console.log(res);
+            console.log("Successfully posted data")
         })
     }
 }

@@ -11,7 +11,6 @@ import { withRouter } from "react-router";
 import { Redirect } from "react-router-dom";
 
 //Non-react classes
-import test_access_to_backend from "../other/sessionHandler"
 import API_Connection from "../other/API_connection"
 import DateHandler from "../other/dateHandler"
 
@@ -53,19 +52,18 @@ class ActivityComponent extends Component{
 
     submitHandler(){
         //This is where you handle the input given. The previous functions should have changed the states to reflect the value inputed. Just use this.state.activityName for instance
-        alert("Name: " + this.state.activityName +
-                "\n Date:" + this.state.activityDate +
-                "\n Start Time: " + this.state.activityStartTime +
-                "\n End Time: " + this.state.activityEndTime);
-        this.api_connection.post_activity(this.state.activityName, 0, 0, 363, this.dateHandler.convertDateToDDMMMMYYYY(this.state.activityDate));
-        this.handleModalShowHide(); //Possible solution for reloading. When setState is called the entire constructor gets called again. When this happens this.props.location.state is undefined.
-                                    //Solution: Set new state with information you het from this.props.location state and chekc if these are correct. If not then push to /landing
+        var date = this.dateHandler.convertDateToDDMMMMYYYY(this.state.activityDate);
+        var dayNumber = this.dateHandler.convertDateToDayNumber(this.state.activityDate);
+        var start_time = this.dateHandler.convertTimeToMinutes(this.state.activityStartTime);
+        var end_time = this.dateHandler.convertTimeToMinutes(this.state.activityEndTime);
+        this.api_connection.post_activity(this.state.activityName, start_time, end_time, dayNumber, date);
+        //this.handleModalShowHide();
     }
 
     render(){
         return(
             <div>
-                <h1>Hello NAME, here is your activities!</h1>
+                <h1>Here are your activities for the next 3 days!</h1>
                 {/* The rest of the page */}
                 <ActivityTable backendAccessToken={this.state.backend_access_token} api_connection={this.api_connection} />
                 <AddActivityButton handleClick={() => this.handleModalShowHide()} />

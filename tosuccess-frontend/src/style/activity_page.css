@@ -13,3 +13,16 @@ th{
     position: absolute;
     right: 1vw;
 }
+
+.loading-table{
+    margin: auto;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+}
+
+.table-div{
+    position: relative;
+    bottom: 0;
+    width: 100%;
+}

@@ -7,16 +7,9 @@ import Day from './day';
 
 //Non-react classes
 import backend_authorized from "./sessionHandler"
+import sort_array_based_on_key from "../other/sorting"
 
 import "../style/activity_page.css"
-
-function sort_array_based_on_key(array, key){
-    return array.sort( function(a,b) {
-        var x = a[key];
-        var y = b[key];
-        return ((x < y) ? -1 : ((x > y) ? 1 : 0));
-    });
-}
 
 
 export default class ActivityTable extends Component{
@@ -42,6 +35,7 @@ export default class ActivityTable extends Component{
 
             this.state.api_connection.get_activities(this.currentDayNumber, 4).then((response) => {
                 this.activities = this.state.api_connection.activities;
+                this.activities = sort_array_based_on_key(this.activities, "date"); //Sort based on date. TODO: Also sort on year
                 console.log(this.activities);
                 this.setState({ loading: false });
             });
@@ -50,17 +44,12 @@ export default class ActivityTable extends Component{
 
     //Creates 'dict' with data from JSON
     CreateActivityObject(activities_json){
-        sort_array_based_on_key(activities_json, "date_string"); //Sorts activities based on start time. This way we have the dates in order
         var activities = {};
         for(var i=0; i<activities_json.length; i++){
             if (!(activities_json[i].date_string in activities)){
                 activities[activities_json[i].date_string] = [];
             }
             activities[activities_json[i].date_string].push(activities_json[i]);
-        }
-        
-        for(const date_string in activities){
-            sort_array_based_on_key(activities[date_string], "start_time"); //Sorts the start time of each activity on a given date.
         }
         return activities;
     }

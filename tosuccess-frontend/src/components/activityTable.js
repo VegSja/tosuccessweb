@@ -1,13 +1,18 @@
 import {React, Component} from 'react';
 
 //Bootstrap imports
-import {Table, Spinner, Alert} from 'react-bootstrap';
+import {Table, Spinner, Alert, Form} from 'react-bootstrap';
+import { FormGroup } from '@material-ui/core';
 
 import Day from './day';
+
+
+
 
 //Non-react classes
 import backend_authorized from "./sessionHandler"
 import sort_array_based_on_key from "../other/sorting"
+import DateHandler from "../other/dateHandler"
 
 import "../style/activity_page.css"
 
@@ -19,26 +24,34 @@ export default class ActivityTable extends Component{
             loading: true,
             backend_access_token : this.props.backendAccessToken,
             api_connection : this.props.api_connection,
-        }
+            day_number_to_view : this.props.day_number_to_view,
+        }   
+        console.log("In constructor: ", this.state)
+        this.dateHandler = new DateHandler();     
+            //TODO: Test backendaccess. Wait till connection is authorized before doing anything else
+        //API connection data retrieval
 
-        
     }
 
     componentDidMount(){
-        //TODO: Test backendaccess. Wait till connection is authorized before doing anything else
-        //API connection data retrieval
-        this.state.api_connection.get_current_date().then((response) => {
-            this.currentdate = this.state.api_connection.date;
-            this.currentDayNumber = this.currentdate.daynumber;
-            console.log(this.currentDayNumber);
+        this.sendGetRequest()
+    }
 
+    componentDidUpdate(){
+        if(this.props.day_number_to_view != this.state.day_number_to_view){
+            this.setState({day_number_to_view : this.props.day_number_to_view, loading : true})
+        }
+        else if(this.props.day_number_to_view == this.state.day_number_to_view && this.state.loading){
+            this.sendGetRequest()
+        }
+    }
 
-            this.state.api_connection.get_activities(this.currentDayNumber, 4).then((response) => {
-                this.activities = this.state.api_connection.activities;
-                this.activities = sort_array_based_on_key(this.activities, "date"); //Sort based on date. TODO: Also sort on year
-                console.log(this.activities);
-                this.setState({ loading: false });
-            });
+    sendGetRequest(){
+        this.state.api_connection.get_activities(this.state.day_number_to_view, 4).then((response) => {
+            this.activities = this.state.api_connection.activities;
+            this.activities = sort_array_based_on_key(this.activities, "date");
+            console.log(this.activities);
+            this.setState({ loading: false });
         });
     }
 
@@ -68,10 +81,18 @@ export default class ActivityTable extends Component{
     }
 
     render(){
-        return (
-            <div className="table-div">
-                {this.state.loading ? <Spinner animation="grow" className="loading-table" /> : <Table> {this.renderDays()} </Table>  }
-            </div>
-        )
+        if(this.state.loading){
+            return (
+                <div className="table-div">
+                    <Spinner animation="grow" className="loading-table" />
+                </div>
+            )
+        }else {
+            return(
+                <div className="table-div">
+                    <Table> {this.renderDays()} </Table>
+                </div>
+            )
+        }
     }
 }

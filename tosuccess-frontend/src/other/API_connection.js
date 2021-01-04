@@ -67,6 +67,18 @@ export default class API_Connection {
         .then((res) =>{
             console.log("Successfully posted data: ", data)
         })
+    }
 
+    async get_categories(){
+        console.log("Getting categories: ", this.token)
+        const res = await axios.get(this.url_categories, {
+            headers: {
+                "Authorization": `Bearer ${this.token}`
+            }
+        })
+        .then((res) => {
+            this.categories = res.data;
+            return(this.categories);
+        })
     }
 }

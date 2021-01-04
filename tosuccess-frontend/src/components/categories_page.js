@@ -2,6 +2,7 @@ import {React, Component} from "react";
 
 import AddActivityButton from "../components/add_activity_button"
 import ColorPicker from "../components/colorPicker"
+import CategoriesTable from "../components/categories_table"
 
 import {Button, Modal, Form, FormGroup} from 'react-bootstrap';
 
@@ -42,7 +43,7 @@ export default class CategoriesPage extends Component{
         return(
             <div>
                 <h1>Categories</h1>
-
+                <CategoriesTable backendAccessToken={this.state.backend_access_token} api_connection={this.API}/>
                 <AddActivityButton handleClick={() => this.handleModalShowHide()} />
 
                             {/* Modal */}

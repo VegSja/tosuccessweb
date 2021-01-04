@@ -8,6 +8,7 @@ import NavBar from './components/navbar';
 import Landing from './containers/landing';
 import Stats from './containers/stats';
 import Settings from './containers/settings';
+import Categories from './containers/categories';
 import ActivityComponent from './components/activity_component';
 
 export default function Routes() {
@@ -23,6 +24,12 @@ export default function Routes() {
           <NavBar />
           <div className="page-container">
             <ActivityComponent />
+          </div>
+        </Route>
+        <Route exact path="/categories">
+          <NavBar />
+          <div className="page-container">
+            <Categories />
           </div>
         </Route>
         <Route exact path="/stats">

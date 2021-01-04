@@ -23,6 +23,9 @@ export default class NavBar extends Component{
                     <LinkContainer to="/activities">
                         <Nav.Link>Activities</Nav.Link>
                     </LinkContainer>
+                    <LinkContainer to="/categories">
+                        <Nav.Link>Categories</Nav.Link>
+                    </LinkContainer>
                     <LinkContainer to="/stats">
                         <Nav.Link>Stats</Nav.Link>
                     </LinkContainer>

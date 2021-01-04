@@ -6,6 +6,7 @@ import './style/custom.css';
 //Componentes
 import NavBar from './components/navbar';
 import Routes from "./Routes";
+import UserContext from "./contexts/user"
 
 
 

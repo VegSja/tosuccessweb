@@ -3,8 +3,11 @@ import AddActivityButton from '../components/add_activity_button';
 
 import {Button, Modal, Form, Spinner} from 'react-bootstrap';
 
-import {React, Component} from 'react';
+import {React, Component, createContext} from 'react';
 import { FormGroup } from '@material-ui/core';
+
+//Navbar import
+import NavBar from './navbar';
 
 //Routing
 import { withRouter } from "react-router";

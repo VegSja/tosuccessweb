@@ -3,6 +3,7 @@ const axios = require('axios');
 export default class API_Connection {
     constructor(token){
         this.url_activities = "http://vegsja.pythonanywhere.com/activities/"
+        this.url_categories = "http://vegsja.pythonanywhere.com/categories/"
         this.url_date = "http://vegsja.pythonanywhere.com/date/"
         this.token = token;
     }
@@ -49,5 +50,23 @@ export default class API_Connection {
         .then((res) => {
             console.log("Successfully posted data")
         })
+    }
+
+    async post_category(name, color){
+        const data = {
+            name: name,
+            color: color,
+        }
+        alert(this.token)
+        const res = await axios.post(this.url_categories, data, {
+            'Content-Type': 'text/json',
+            headers : {
+                "Authorization": `Bearer ${this.token}`
+            }
+        })
+        .then((res) =>{
+            console.log("Successfully posted data: ", data)
+        })
+
     }
 }

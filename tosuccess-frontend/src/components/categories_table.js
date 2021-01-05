@@ -30,7 +30,7 @@ export default class CategoriesTable extends Component{
         for(var categories in this.categories){
             var category_son = this.categories[categories]
             items.push(<tr>
-                <th><ColorCircle color={category_son.color} /></th>
+                <th><ColorCircle color={category_son.color} size={"5vh"}/></th>
                 <th><h3>{category_son.name}</h3></th>
             </tr>)
         }

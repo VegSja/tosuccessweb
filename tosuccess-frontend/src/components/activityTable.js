@@ -25,6 +25,8 @@ export default class ActivityTable extends Component{
             backend_access_token : this.props.backendAccessToken,
             api_connection : this.props.api_connection,
             day_number_to_view : this.props.day_number_to_view,
+
+            colorList : this.props.colorList,
         }   
         console.log("In constructor: ", this.state)
         this.dateHandler = new DateHandler();     
@@ -72,7 +74,7 @@ export default class ActivityTable extends Component{
         var activities = this.CreateActivityObject(this.activities);
         var items = [];
         for(const key in activities){
-            items.push(<th><Day date={key} activities_for_day={activities[key]}/></th>);
+            items.push(<th><Day date={key} activities_for_day={activities[key]} colorList={this.state.colorList} /></th>);
         }
         if (items.length == 0){
             return (<Alert variant='warning'>ALERT: No activities found for these days. To add an activity click the add button</Alert>)

@@ -1,22 +1,20 @@
+//Components
 import ActivityTable from '../components/activityTable';
 import AddActivityButton from '../components/add_activity_button';
+import DatePicker from "./date_picker"
+import CategoryDropdown from "./category_dropdown"
 
 import {Button, Modal, Form, Spinner} from 'react-bootstrap';
 
 import {React, Component, createContext} from 'react';
 import { FormGroup } from '@material-ui/core';
 
-//Navbar import
-import NavBar from './navbar';
-
 //Routing
 import { withRouter } from "react-router";
-import { Redirect } from "react-router-dom";
 
 //Non-react classes
 import API_Connection from "../other/API_connection"
 import DateHandler from "../other/dateHandler"
-import DatePicker from "./date_picker"
 
 //TODO: Change format of date so that backends accepts
 class ActivityComponent extends Component{
@@ -26,15 +24,18 @@ class ActivityComponent extends Component{
 
         this.state = {
             activityName : "",
+            activityCategory : "",
             activityDate : "",
             activityStartTime : "",
             activityEndTime : "",
             showHide : false,
-            loading_date : true,
+            loading_data_from_api : true,
 
             backend_access_token: null,
             date_to_view : new Date(),
             dayNumber_to_view : null,
+
+            colorList : {},
         }
 
         let routeState;
@@ -50,10 +51,14 @@ class ActivityComponent extends Component{
         this.api_connection = new API_Connection(this.state.backend_access_token); //We still keep this object and pass it into the table. Still need it to post
         this.dateHandler = new DateHandler();
 
+        //Handle data needed from API
         this.api_connection.get_current_date().then((response) => {
             this.currentdate = this.api_connection.date.date;
             this.currentDayNumber = this.api_connection.date.daynumber;
-            this.setState({ date_to_view : this.currentdate, dayNumber_to_view : this.currentDayNumber, loading_date : false })
+            this.api_connection.get_categories().then((res) => {
+                this.categories = this.api_connection.categories;
+                this.setState({ date_to_view : this.currentdate, dayNumber_to_view : this.currentDayNumber, loading_data_from_api : false, colorList : this.createColorList(this.categories) })
+            });
         });
     }
 
@@ -62,18 +67,32 @@ class ActivityComponent extends Component{
         this.setState({ showHide: !this.state.showHide })
     }
 
+    onDropdownSelect(eventkey, event){
+        console.log(event.target.outerText);
+        this.setState({activityCategory : event.target.outerText});
+    }
+
     submitHandler(){
         //This is where you handle the input given. The previous functions should have changed the states to reflect the value inputed. Just use this.state.activityName for instance
         var date = this.dateHandler.convertDateToDDMMMMYYYY(this.state.activityDate);
         var dayNumber = this.dateHandler.convertDateToDayNumber(this.state.activityDate);
         var start_time = this.dateHandler.convertTimeToMinutes(this.state.activityStartTime);
         var end_time = this.dateHandler.convertTimeToMinutes(this.state.activityEndTime);
-        this.api_connection.post_activity(this.state.activityName, start_time, end_time, dayNumber, date);
+        this.api_connection.post_activity(this.state.activityName, this.state.activityCategory, start_time, end_time, dayNumber, date);
         //this.handleModalShowHide();
     }
 
+    createColorList(categories){
+        var colorList = {}
+        for(var key in categories){
+            colorList[categories[key].name] = categories[key].color;
+        }
+        console.log("Colorlist: ", colorList)
+        return colorList
+    }
+
     render(){
-        if (this.state.loading_date){
+        if (this.state.loading_data_from_api){
             return(
                 <div>
                     <h1>Here are your activities for the next 3 days!</h1>
@@ -87,7 +106,7 @@ class ActivityComponent extends Component{
                     <h1>Here are your activities for the next 3 days!</h1>
                     <DatePicker value={this.state.date_to_view} label="Date:" onChange={e=> this.setState({ date_to_view : e.target.value, dayNumber_to_view : this.dateHandler.convertDateToDayNumber(e.target.value) })}/>
                     {/* The rest of the page */}
-                    <ActivityTable backendAccessToken={this.state.backend_access_token} api_connection={this.api_connection} day_number_to_view={this.state.dayNumber_to_view} />
+                    <ActivityTable backendAccessToken={this.state.backend_access_token} api_connection={this.api_connection} day_number_to_view={this.state.dayNumber_to_view} colorList={this.state.colorList}/>
                     <AddActivityButton handleClick={() => this.handleModalShowHide()} />
 
                     {/* Modal */}
@@ -101,6 +120,7 @@ class ActivityComponent extends Component{
                                 <FormGroup controlId="formActivityName">
                                     <Form.Label>Activity Name:</Form.Label>
                                     <Form.Control type="string" placeholder="Enter activity name..." onChange={e => this.setState({ activityName: e.target.value })}/>
+                                    <CategoryDropdown data={this.categories} onSelect={(key, event) => this.onDropdownSelect(key, event)}/>
                                 </FormGroup>
                                 <FormGroup controlId="formDate">
                                     <Form.Label>Date:</Form.Label>

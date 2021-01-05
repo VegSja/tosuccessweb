@@ -3,6 +3,8 @@ import {React, Component} from 'react';
 //Bootstrap imports
 import {Card} from 'react-bootstrap';
 
+import CategoryDisplay from './category_display'
+
 //Other imports
 import DateHandler from '../other/dateHandler';
 
@@ -22,6 +24,7 @@ export default class ActivityCard extends Component{
             <Card.Body>
                 <Card.Title>{this.start_time} - {this.end_time}</Card.Title>
                 <Card.Subtitle className="activity-name">{this.props.activity_name}</Card.Subtitle>
+                <CategoryDisplay category={this.props.activity_category} color={this.props.color} />
             </Card.Body>
             </Card>
         )

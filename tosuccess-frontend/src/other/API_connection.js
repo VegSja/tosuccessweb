@@ -33,9 +33,10 @@ export default class API_Connection {
         })
     }
 
-    async post_activity(name, minutes_start, minutes_end, dayNumber, date_string){
+    async post_activity(name, category, minutes_start, minutes_end, dayNumber, date_string){
         const data = {
             activity_name: name ,
+            activity_category : category,
             minutes_after_midnight_start: minutes_start,
             minutes_after_midnight_end: minutes_end,
             date: dayNumber,

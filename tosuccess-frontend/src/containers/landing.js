@@ -18,6 +18,7 @@ var sectionStyle = {
 
 
 export default function Landing(){
+    console.log("Langing page")
     return(
             <div className="page-contain" style={sectionStyle}>
                 <div className="content-left">

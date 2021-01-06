@@ -8,12 +8,22 @@ export default class CategoryDisplay extends Component{
         this.state = {
             category : this.props.category,
             color : this.props.color,
+            position_style : this.props.position_style
         }
     }
     render(){
+        const containerStyle = {
+            width : "fit-content",
+            borderRadius:"10%",
+            backgroundColor: this.state.color,
+            position: this.state.position_style,
+
+        }
         return(
-            <div>
-                <ColorCircle color={this.state.color} size="2vh" /> {this.state.category}
+            <div style={containerStyle}>
+                <p style={{margin : "5px", color : "white", "font-size" : "1vw"}}>
+                    {this.state.category}
+                </p>
             </div>
         )
     }

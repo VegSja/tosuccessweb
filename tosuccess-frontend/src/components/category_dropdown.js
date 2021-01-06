@@ -3,6 +3,7 @@ import { React, Component} from 'react'
 import { Dropdown, DropdownButton } from 'react-bootstrap'
 
 import ColorCircle from './color_circle'
+import CategoryDisplay from './category_display'
 
 export default class CategoryDropdown extends Component{
     constructor(props){
@@ -20,8 +21,9 @@ export default class CategoryDropdown extends Component{
             var category_color = this.state.api_data[key].color
             items.push(
             <Dropdown.Item>
-                <ColorCircle color={category_color} size="2vh"/>
-                {category_name}
+                {/* <ColorCircle color={category_color} size="2vh"/>
+                {category_name} */}
+                <CategoryDisplay category={category_name} color={category_color} position_style="relative"/>
             </Dropdown.Item>)
         }
         return items
@@ -29,7 +31,7 @@ export default class CategoryDropdown extends Component{
 
     render(){
         return(
-            <DropdownButton title="Categories" onSelect={this.props.onSelect}>
+            <DropdownButton style={{ position : "relative", display : "inline-block"}} title="Categories" onSelect={this.props.onSelect}>
                 {this.createSelectItems()}
             </DropdownButton>
         )

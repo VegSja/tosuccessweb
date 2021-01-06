@@ -119,7 +119,7 @@ class ActivityComponent extends Component{
                             <Modal.Body>
                                 <FormGroup controlId="formActivityName">
                                     <Form.Label>Activity Name:</Form.Label>
-                                    <Form.Control type="string" placeholder="Enter activity name..." onChange={e => this.setState({ activityName: e.target.value })}/>
+                                    <Form.Control type="string" placeholder="Enter activity name..." style={{width : "fit-content", display : "inline-block"}} onChange={e => this.setState({ activityName: e.target.value })}/>
                                     <CategoryDropdown data={this.categories} onSelect={(key, event) => this.onDropdownSelect(key, event)}/>
                                 </FormGroup>
                                 <FormGroup controlId="formDate">

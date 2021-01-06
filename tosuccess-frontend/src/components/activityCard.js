@@ -22,9 +22,11 @@ export default class ActivityCard extends Component{
         return(
             <Card className="activity-card">
             <Card.Body>
-                <Card.Title>{this.start_time} - {this.end_time}</Card.Title>
+                <Card.Title>
+                <CategoryDisplay category={this.props.activity_category} color={this.props.color} position_style="absolute"/>
+                    {this.start_time} - {this.end_time}
+                </Card.Title>
                 <Card.Subtitle className="activity-name">{this.props.activity_name}</Card.Subtitle>
-                <CategoryDisplay category={this.props.activity_category} color={this.props.color} />
             </Card.Body>
             </Card>
         )

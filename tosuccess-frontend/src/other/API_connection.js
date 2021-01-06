@@ -2,10 +2,10 @@ const axios = require('axios');
 
 export default class API_Connection {
     constructor(token, refreshToken){
-        this.url_activities = "http://vegsja.pythonanywhere.com/activities/"
-        this.url_categories = "http://vegsja.pythonanywhere.com/categories/"
-        this.url_date = "http://vegsja.pythonanywhere.com/date/"
-        this.url_refresh = "http://vegsja.pythonanywhere.com/refresh/"
+        this.url_activities = "https://vegsja.pythonanywhere.com/activities/"
+        this.url_categories = "https://vegsja.pythonanywhere.com/categories/"
+        this.url_date = "https://vegsja.pythonanywhere.com/date/"
+        this.url_refresh = "https://vegsja.pythonanywhere.com/refresh/"
         this.token = token;
         this.refreshToken = refreshToken;
 

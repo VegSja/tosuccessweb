@@ -6,7 +6,7 @@ import { useHistory } from "react-router-dom";
 
 const axios = require('axios')
 
-const logoutUrl = "http://vegsja.pythonanywhere.com/logout/"
+const logoutUrl = "https://vegsja.pythonanywhere.com/logout/"
 
 const clientId = '767187782063-nm6b5i4a6uscq2d9sj8kcfv9taoeej5d.apps.googleusercontent.com';
 

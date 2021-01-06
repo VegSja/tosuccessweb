@@ -9,7 +9,7 @@ const axios = require('axios');
 
 const clientId = '767187782063-nm6b5i4a6uscq2d9sj8kcfv9taoeej5d.apps.googleusercontent.com';
 
-var access_url = "http://vegsja.pythonanywhere.com/google/";
+var access_url = "https://vegsja.pythonanywhere.com/google/";
 
 var response_data;
 

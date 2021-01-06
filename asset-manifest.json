@@ -1,21 +1,21 @@
 {
   "files": {
-    "main.css": "/ToSuccess-frontend-react/static/css/main.a843fba1.chunk.css",
-    "main.js": "/ToSuccess-frontend-react/static/js/main.7996bf3f.chunk.js",
-    "main.js.map": "/ToSuccess-frontend-react/static/js/main.7996bf3f.chunk.js.map",
-    "runtime-main.js": "/ToSuccess-frontend-react/static/js/runtime-main.666ca974.js",
-    "runtime-main.js.map": "/ToSuccess-frontend-react/static/js/runtime-main.666ca974.js.map",
-    "static/js/2.dd5a91e2.chunk.js": "/ToSuccess-frontend-react/static/js/2.dd5a91e2.chunk.js",
-    "static/js/2.dd5a91e2.chunk.js.map": "/ToSuccess-frontend-react/static/js/2.dd5a91e2.chunk.js.map",
-    "static/js/3.5ff67e3e.chunk.js": "/ToSuccess-frontend-react/static/js/3.5ff67e3e.chunk.js",
-    "static/js/3.5ff67e3e.chunk.js.map": "/ToSuccess-frontend-react/static/js/3.5ff67e3e.chunk.js.map",
-    "index.html": "/ToSuccess-frontend-react/index.html",
-    "static/css/main.a843fba1.chunk.css.map": "/ToSuccess-frontend-react/static/css/main.a843fba1.chunk.css.map",
-    "static/js/2.dd5a91e2.chunk.js.LICENSE.txt": "/ToSuccess-frontend-react/static/js/2.dd5a91e2.chunk.js.LICENSE.txt",
-    "static/media/conquer.ece66679.jpg": "/ToSuccess-frontend-react/static/media/conquer.ece66679.jpg"
+    "main.css": "/tosuccessweb/static/css/main.a843fba1.chunk.css",
+    "main.js": "/tosuccessweb/static/js/main.7996bf3f.chunk.js",
+    "main.js.map": "/tosuccessweb/static/js/main.7996bf3f.chunk.js.map",
+    "runtime-main.js": "/tosuccessweb/static/js/runtime-main.bfd8758c.js",
+    "runtime-main.js.map": "/tosuccessweb/static/js/runtime-main.bfd8758c.js.map",
+    "static/js/2.dd5a91e2.chunk.js": "/tosuccessweb/static/js/2.dd5a91e2.chunk.js",
+    "static/js/2.dd5a91e2.chunk.js.map": "/tosuccessweb/static/js/2.dd5a91e2.chunk.js.map",
+    "static/js/3.5ff67e3e.chunk.js": "/tosuccessweb/static/js/3.5ff67e3e.chunk.js",
+    "static/js/3.5ff67e3e.chunk.js.map": "/tosuccessweb/static/js/3.5ff67e3e.chunk.js.map",
+    "index.html": "/tosuccessweb/index.html",
+    "static/css/main.a843fba1.chunk.css.map": "/tosuccessweb/static/css/main.a843fba1.chunk.css.map",
+    "static/js/2.dd5a91e2.chunk.js.LICENSE.txt": "/tosuccessweb/static/js/2.dd5a91e2.chunk.js.LICENSE.txt",
+    "static/media/conquer.ece66679.jpg": "/tosuccessweb/static/media/conquer.ece66679.jpg"
   },
   "entrypoints": [
-    "static/js/runtime-main.666ca974.js",
+    "static/js/runtime-main.bfd8758c.js",
     "static/js/2.dd5a91e2.chunk.js",
     "static/css/main.a843fba1.chunk.css",
     "static/js/main.7996bf3f.chunk.js"

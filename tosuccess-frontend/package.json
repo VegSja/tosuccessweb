@@ -12,6 +12,7 @@
     "bootstrap": "^4.5.3",
     "create-react-class": "^15.7.0",
     "framework7": "^5.7.14",
+    "netlify": "^6.0.9",
     "react": "^17.0.1",
     "react-bootstrap": "^1.4.0",
     "react-bootstrap-date-picker": "^5.1.0",

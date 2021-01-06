@@ -2,7 +2,7 @@
   "name": "tosuccess-activities",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://vegsja.github.io/ToSuccess-frontend-react",
+  "homepage": "https://vegsja.github.io/tosuccessweb",
   "dependencies": {
     "@material-ui/core": "^4.11.2",
     "@material-ui/icons": "^4.11.2",

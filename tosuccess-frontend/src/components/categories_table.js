@@ -1,6 +1,8 @@
 import { React, Component } from 'react' 
 import { Table, Spinner, Alert } from 'react-bootstrap'
 
+import { Redirect } from 'react-router' 
+
 import ColorCircle from './color_circle'
 
 export default class CategoriesTable extends Component{
@@ -23,8 +25,6 @@ export default class CategoriesTable extends Component{
     sendGetRequest(){
         this.state.api_connection.get_categories()
         .then((response) => {
-            console.log("Response:", response, this.state.api_connection.categories, this.state.api_connection.errorFromServer)
-
             this.categories = this.state.api_connection.categories;
             this.setState({ loading: false });
         })
@@ -35,14 +35,14 @@ export default class CategoriesTable extends Component{
                 this.sendGetRequest() //If successfully retrieved token. Try again
             })
             .catch((error) => {
-                this.handleServerError() //If not display error
+                this.handleServerError(error.request.statusText) //If not display error
             })
         })
     }
 
-    handleServerError(){
-        console.log("Caught error: ", this.state.api_connection.errorMessage)
-        this.setState({ server_error : true, server_error_message : this.state.api_connection.errorMessage })
+    handleServerError(error){
+        console.log("Caught error: ", error)
+        this.setState({ server_error : true, server_error_message : error })
     }
 
     render_categories(){
@@ -60,9 +60,16 @@ export default class CategoriesTable extends Component{
     render(){
         if(this.state.loading){
             if(this.state.server_error){
-                return(<Alert variant="danger">Server error: {this.state.server_error_message}</Alert>)
+                if(this.state.server_error_message === "Unauthorized"){
+                    return(<div><Redirect to="/landing" /></div>)
+                }
+                else{
+                    return(
+                        <Alert variant="danger">
+                            Server error: {this.state.error_message}
+                        </Alert>)
+                }
             }
-
             return(<Spinner animation="grow" className="loading-table"/>)
         }
         else{

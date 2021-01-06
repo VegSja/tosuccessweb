@@ -14,6 +14,10 @@ export default class API_Connection {
 
         this.errorFromServer = false;
         this.errorMessage = null;
+
+        //Save to localstorage
+        localStorage.setItem("current_token", this.token)
+        localStorage.setItem("refresh_token", this.refreshToken)
     }
 
     handleError(errorMessage){
@@ -31,12 +35,14 @@ export default class API_Connection {
         })
         .then((res) => {
             this.token = res.data.access;
+            localStorage.setItem('current_token', this.token)
             this.errorFromServer = false;
-            this.errorMessage = null;
-        });
+            //this.errorMessage = null;
+        })
     }
 
     async get_current_date(){
+        console.log("Token in API connection:", this.token)
         const res = await axios.get(this.url_date, {
             headers: {
                 "Authorization": `Bearer ${this.token}` 

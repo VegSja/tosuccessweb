@@ -11,7 +11,7 @@ import {React, Component, createContext} from 'react';
 import { FormGroup } from '@material-ui/core';
 
 //Routing
-import { withRouter } from "react-router";
+import { withRouter, Redirect } from "react-router";
 
 //Non-react classes
 import API_Connection from "../other/API_connection"
@@ -64,8 +64,7 @@ class ActivityComponent extends Component{
     }
 
 
-    getDateFromServer(){
-        console.log("API access code: ", this.api_connection.token)
+    getDateFromServer(){ 
         //Handle data needed from API
         this.api_connection.get_current_date()
         .then((response) => {
@@ -123,12 +122,15 @@ class ActivityComponent extends Component{
     render(){
         if (this.state.loading_data_from_api){
             if(this.state.server_error){
-                return(
-                <div>
-                    <Alert variant="danger">
-                        Server error: {this.state.error_message}
-                    </Alert>
-                </div>)
+                if(this.state.error_message === "Unauthorized"){
+                    return(<div><Redirect to="/landing" /></div>)
+                }
+                else{
+                    return(
+                        <Alert variant="danger">
+                            Server error: {this.state.error_message}
+                        </Alert>)
+                }
             }
             return(
                 <div>

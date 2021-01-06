@@ -5,9 +5,12 @@ export default class API_Connection {
         this.url_activities = "http://vegsja.pythonanywhere.com/activities/"
         this.url_categories = "http://vegsja.pythonanywhere.com/categories/"
         this.url_date = "http://vegsja.pythonanywhere.com/date/"
+        this.url_refresh = "http://vegsja.pythonanywhere.com/refresh/"
         this.token = token;
         this.refreshToken = refreshToken;
 
+
+        this.categories = undefined;
 
         this.errorFromServer = false;
         this.errorMessage = null;
@@ -17,6 +20,20 @@ export default class API_Connection {
         console.log("Error from server: ", errorMessage)
         this.errorFromServer = true;
         this.errorMessage = errorMessage;
+    }
+
+    async sendRefreshToken(){
+        const data = {
+            refresh : this.refreshToken,
+        }
+        const res = await axios.post(this.url_refresh, data, {
+            'Content-Type' : 'text/json'
+        })
+        .then((res) => {
+            this.token = res.data.access;
+            this.errorFromServer = false;
+            this.errorMessage = null;
+        });
     }
 
     async get_current_date(){
@@ -101,9 +118,6 @@ export default class API_Connection {
         .then((res) => {
             this.categories = res.data;
             return(this.categories);
-        })
-        .catch((error) => {
-            this.handleError(error.request.statusText);
         })
     }
 }

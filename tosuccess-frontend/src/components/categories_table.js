@@ -21,15 +21,28 @@ export default class CategoriesTable extends Component{
     }
 
     sendGetRequest(){
-        this.state.api_connection.get_categories().then((response) => {
-            if(this.state.api_connection.errorFromServer){
-                this.setState({ server_error : true, server_error_message : this.state.api_connection.errorMessage})
-            }
-            else {
-                this.categories = this.state.api_connection.categories;
-                this.setState({ loading: false });
-            }
-        });
+        this.state.api_connection.get_categories()
+        .then((response) => {
+            console.log("Response:", response, this.state.api_connection.categories, this.state.api_connection.errorFromServer)
+
+            this.categories = this.state.api_connection.categories;
+            this.setState({ loading: false });
+        })
+        .catch((response) => {
+            this.state.api_connection.sendRefreshToken() //Send refresh token
+            .then((response) => {
+                console.log("Error. Trying again")
+                this.sendGetRequest() //If successfully retrieved token. Try again
+            })
+            .catch((error) => {
+                this.handleServerError() //If not display error
+            })
+        })
+    }
+
+    handleServerError(){
+        console.log("Caught error: ", this.state.api_connection.errorMessage)
+        this.setState({ server_error : true, server_error_message : this.state.api_connection.errorMessage })
     }
 
     render_categories(){

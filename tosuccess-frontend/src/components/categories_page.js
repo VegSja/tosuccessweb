@@ -19,11 +19,13 @@ export default class CategoriesPage extends Component{
             category_color : "#FFFFFFF",
 
             backend_access_token : null,
+            backend_refresh_token : null,
         }
         var routeState = localStorage.getItem("routeState");
         if(routeState) routeState = JSON.parse(routeState);
         this.state.backend_access_token = routeState.backend_access_token
-        this.API = new API_Connection(this.state.backend_access_token)
+        this.state.backend_refresh_token = routeState.backend_refresh_token
+        this.API = new API_Connection(this.state.backend_access_token, this.state.backend_refresh_token)
     }
 
     handleModalShowHide(){

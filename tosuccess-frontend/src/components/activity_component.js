@@ -60,18 +60,32 @@ class ActivityComponent extends Component{
     }
 
     componentDidMount(){
+        this.getDateFromServer()
+    }
+
+
+    getDateFromServer(){
+        console.log("API access code: ", this.api_connection.token)
         //Handle data needed from API
-        this.api_connection.get_current_date().then((response) => {
-            try {
-                this.currentdate = this.api_connection.date.date;
-                this.currentDayNumber = this.api_connection.date.daynumber;
-                this.api_connection.get_categories().then((res) => {
-                    this.categories = this.api_connection.categories;
-                    this.setState({ date_to_view : this.currentdate, dayNumber_to_view : this.currentDayNumber, loading_data_from_api : false, colorList : this.createColorList(this.categories) })
-                });
-            } catch(err){
-                this.handleServerError()
-            }
+        this.api_connection.get_current_date()
+        .then((response) => {
+            this.currentdate = this.api_connection.date.date;
+            this.currentDayNumber = this.api_connection.date.daynumber;
+            this.api_connection.get_categories().then((res) => {
+                this.categories = this.api_connection.categories;
+                this.setState({ date_to_view : this.currentdate, dayNumber_to_view : this.currentDayNumber, loading_data_from_api : false, colorList : this.createColorList(this.categories) })
+            });
+        })
+        //Error handling
+        .catch((err) =>{ //Fires because this.currentdate is not defined if we are not authorized
+            this.api_connection.sendRefreshToken() //Send refresh token
+            .then((response) => {
+                console.log("Error. Trying again")
+                this.getDateFromServer() //If successfully retrieved token. Try again
+            })
+            .catch((error) => {
+                this.handleServerError() //If not display error
+            })
         });
     }
 
@@ -108,7 +122,7 @@ class ActivityComponent extends Component{
 
     render(){
         if (this.state.loading_data_from_api){
-            if(this.state.server_error){ //Try catch because i dont want to check if there is an error before we actually get an error. Then we check and handle
+            if(this.state.server_error){
                 return(
                 <div>
                     <Alert variant="danger">

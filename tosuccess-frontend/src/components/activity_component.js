@@ -3,8 +3,9 @@ import ActivityTable from '../components/activityTable';
 import AddActivityButton from '../components/add_activity_button';
 import DatePicker from "./date_picker"
 import CategoryDropdown from "./category_dropdown"
+import ToastMessage from './toast_message'
 
-import {Button, Modal, Form, Spinner} from 'react-bootstrap';
+import {Button, Modal, Form, Spinner, Alert} from 'react-bootstrap';
 
 import {React, Component, createContext} from 'react';
 import { FormGroup } from '@material-ui/core';
@@ -29,9 +30,14 @@ class ActivityComponent extends Component{
             activityStartTime : "",
             activityEndTime : "",
             showHide : false,
-            loading_data_from_api : true,
 
+            loading_data_from_api : true,
             backend_access_token: null,
+            backend_refresh_token: null,
+
+            server_error : false,
+            error_message : null,
+
             date_to_view : new Date(),
             dayNumber_to_view : null,
 
@@ -47,19 +53,30 @@ class ActivityComponent extends Component{
             if(routeState) routeState = JSON.parse(routeState);
         }
         this.state.backend_access_token = routeState.backend_access_token; //Does this to avoid update of page
+        this.state.backend_refresh_token = routeState.backend_refresh_token;
 
-        this.api_connection = new API_Connection(this.state.backend_access_token); //We still keep this object and pass it into the table. Still need it to post
+        this.api_connection = new API_Connection(this.state.backend_access_token, this.state.backend_refresh_token); //We still keep this object and pass it into the table. Still need it to post
         this.dateHandler = new DateHandler();
+    }
 
+    componentDidMount(){
         //Handle data needed from API
         this.api_connection.get_current_date().then((response) => {
-            this.currentdate = this.api_connection.date.date;
-            this.currentDayNumber = this.api_connection.date.daynumber;
-            this.api_connection.get_categories().then((res) => {
-                this.categories = this.api_connection.categories;
-                this.setState({ date_to_view : this.currentdate, dayNumber_to_view : this.currentDayNumber, loading_data_from_api : false, colorList : this.createColorList(this.categories) })
-            });
+            try {
+                this.currentdate = this.api_connection.date.date;
+                this.currentDayNumber = this.api_connection.date.daynumber;
+                this.api_connection.get_categories().then((res) => {
+                    this.categories = this.api_connection.categories;
+                    this.setState({ date_to_view : this.currentdate, dayNumber_to_view : this.currentDayNumber, loading_data_from_api : false, colorList : this.createColorList(this.categories) })
+                });
+            } catch(err){
+                this.handleServerError()
+            }
         });
+    }
+
+    handleServerError(){
+        this.setState({ server_error : true, error_message : this.api_connection.errorMessage });
     }
 
     //Handle input in fab
@@ -68,7 +85,6 @@ class ActivityComponent extends Component{
     }
 
     onDropdownSelect(eventkey, event){
-        console.log(event.target.outerText);
         this.setState({activityCategory : event.target.outerText});
     }
 
@@ -87,23 +103,29 @@ class ActivityComponent extends Component{
         for(var key in categories){
             colorList[categories[key].name] = categories[key].color;
         }
-        console.log("Colorlist: ", colorList)
         return colorList
     }
 
     render(){
         if (this.state.loading_data_from_api){
+            if(this.state.server_error){ //Try catch because i dont want to check if there is an error before we actually get an error. Then we check and handle
+                return(
+                <div>
+                    <Alert variant="danger">
+                        Server error: {this.state.error_message}
+                    </Alert>
+                </div>)
+            }
             return(
                 <div>
-                    <h1>Here are your activities for the next 3 days!</h1>
+                    <Spinner animation="grow" className="loading-table" />
                 </div>
             )
         }
         else{
-            console.log("Sending date to table: ", this.state.dayNumber_to_view)
             return(
                 <div>
-                    <h1>Here are your activities for the next 3 days!</h1>
+                    <h1>Here are your activities for the next 4 days!</h1>
                     <DatePicker value={this.state.date_to_view} label="Date:" onChange={e=> this.setState({ date_to_view : e.target.value, dayNumber_to_view : this.dateHandler.convertDateToDayNumber(e.target.value) })}/>
                     {/* The rest of the page */}
                     <ActivityTable backendAccessToken={this.state.backend_access_token} api_connection={this.api_connection} day_number_to_view={this.state.dayNumber_to_view} colorList={this.state.colorList}/>

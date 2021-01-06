@@ -1,5 +1,5 @@
 import { React, Component } from 'react' 
-import { Table } from 'react-bootstrap'
+import { Table, Spinner, Alert } from 'react-bootstrap'
 
 import ColorCircle from './color_circle'
 
@@ -10,6 +10,9 @@ export default class CategoriesTable extends Component{
             loading: true,
             backend_access_token : this.props.backendAccessToken,
             api_connection : this.props.api_connection,
+
+            server_error : false,
+            server_error_message : null,
         } 
     }
 
@@ -19,9 +22,13 @@ export default class CategoriesTable extends Component{
 
     sendGetRequest(){
         this.state.api_connection.get_categories().then((response) => {
-            this.categories = this.state.api_connection.categories;
-            console.log(this.categories);
-            this.setState({ loading: false });
+            if(this.state.api_connection.errorFromServer){
+                this.setState({ server_error : true, server_error_message : this.state.api_connection.errorMessage})
+            }
+            else {
+                this.categories = this.state.api_connection.categories;
+                this.setState({ loading: false });
+            }
         });
     }
 
@@ -38,19 +45,27 @@ export default class CategoriesTable extends Component{
     }
 
     render(){
-        this.render_categories()
-        return(
-           <Table hover>
-               <thead>
-                   <tr>
-                        <th>Color</th>
-                        <th>Name</th>
-                   </tr>
-               </thead>
-               <tbody>
-                    {this.render_categories()}
-               </tbody>
-           </Table>
-        )
+        if(this.state.loading){
+            if(this.state.server_error){
+                return(<Alert variant="danger">Server error: {this.state.server_error_message}</Alert>)
+            }
+
+            return(<Spinner animation="grow" className="loading-table"/>)
+        }
+        else{
+            return(
+                <Table hover>
+                    <thead>
+                        <tr>
+                            <th>Color</th>
+                            <th>Name</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                            {this.render_categories()}
+                    </tbody>
+                </Table>
+            )
+        }
     }
 }

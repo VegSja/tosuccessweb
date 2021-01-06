@@ -30,7 +30,6 @@ export default class Day extends Component{
         for(const activity of activities_array){
             var category = activity.activity_category
             var currentColor = this.props.colorList[category]
-            console.log("Current Color: ", currentColor)
             items.push(<tr><ActivityCard activity_name={activity.activity_name} activity_category={category} color={currentColor} start_time={activity.minutes_after_midnight_start} end_time={activity.minutes_after_midnight_end} /> </tr>);
         }
         return items;

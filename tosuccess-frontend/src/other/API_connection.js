@@ -1,15 +1,25 @@
 const axios = require('axios');
 
 export default class API_Connection {
-    constructor(token){
+    constructor(token, refreshToken){
         this.url_activities = "http://vegsja.pythonanywhere.com/activities/"
         this.url_categories = "http://vegsja.pythonanywhere.com/categories/"
         this.url_date = "http://vegsja.pythonanywhere.com/date/"
         this.token = token;
+        this.refreshToken = refreshToken;
+
+
+        this.errorFromServer = false;
+        this.errorMessage = null;
+    }
+
+    handleError(errorMessage){
+        console.log("Error from server: ", errorMessage)
+        this.errorFromServer = true;
+        this.errorMessage = errorMessage;
     }
 
     async get_current_date(){
-        console.log("Getting current date", this.token)
         const res = await axios.get(this.url_date, {
             headers: {
                 "Authorization": `Bearer ${this.token}` 
@@ -18,6 +28,9 @@ export default class API_Connection {
         .then((res) => {
             this.date = res.data;
             return(this.date)
+        })
+        .catch((error) => {
+            this.handleError(error.request.statusText);
         })
     }
     // + "?date="+ date.toString() + "?nb_days=2"
@@ -30,6 +43,9 @@ export default class API_Connection {
         .then((res) => {
             this.activities = res.data;
             return(this.activities);
+        })
+        .catch((error) => {
+            this.handleError(error.request.statusText);
         })
     }
 
@@ -49,7 +65,10 @@ export default class API_Connection {
             }
         })
         .then((res) => {
-            console.log("Successfully posted data")
+            console.log("Successfully posted data:", data)
+        })
+        .catch((error) => {
+            this.handleError(error.request.statusText);
         })
     }
 
@@ -68,10 +87,12 @@ export default class API_Connection {
         .then((res) =>{
             console.log("Successfully posted data: ", data)
         })
+        .catch((error) => {
+            this.handleError(error.request.statusText);
+        })
     }
 
     async get_categories(){
-        console.log("Getting categories: ", this.token)
         const res = await axios.get(this.url_categories, {
             headers: {
                 "Authorization": `Bearer ${this.token}`
@@ -80,6 +101,9 @@ export default class API_Connection {
         .then((res) => {
             this.categories = res.data;
             return(this.categories);
+        })
+        .catch((error) => {
+            this.handleError(error.request.statusText);
         })
     }
 }

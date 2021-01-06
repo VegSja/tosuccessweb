@@ -22,7 +22,6 @@ async function send_access_token(input_token) {
     }).then((res) => res.data);
 
     response_data = res
-    console.log(response_data);
     return res;
 }
 

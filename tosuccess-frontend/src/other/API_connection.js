@@ -6,6 +6,7 @@ export default class API_Connection {
         this.url_categories = "https://vegsja.pythonanywhere.com/categories/"
         this.url_date = "https://vegsja.pythonanywhere.com/date/"
         this.url_refresh = "https://vegsja.pythonanywhere.com/refresh/"
+        this.logoutUrl = "https://vegsja.pythonanywhere.com/logout/"
         this.token = token;
         this.refreshToken = refreshToken;
 
@@ -21,10 +22,9 @@ export default class API_Connection {
     }
 
     handleError(errorMessage){
-        console.log("Error from server: ", errorMessage)
+        this.errorMessage = errorMessage.request.statusText;
         this.errorFromServer = true;
-        this.errorMessage = errorMessage;
-        throw errorMessage;
+        throw this.errorMessage;
     }
 
     async sendRefreshToken(){
@@ -53,10 +53,9 @@ export default class API_Connection {
             return(this.date)
         })
         .catch((error) => {
-            this.handleError(error.request.statusText);
+            this.handleError(error);
         })
     }
-    // + "?date="+ date.toString() + "?nb_days=2"
     async get_activities(date, nb_days=2){
         const res = await axios.get(this.url_activities + "?date="+ date.toString() + "&nb_days=" + nb_days.toString(), {
             headers: {
@@ -65,10 +64,11 @@ export default class API_Connection {
         })
         .then((res) => {
             this.activities = res.data;
+            console.log("Successfully retrieved activities: ", this.activities)
             return(this.activities);
         })
         .catch((error) => {
-            this.handleError(error.request.statusText);
+            this.handleError(error);
         })
     }
 
@@ -91,7 +91,7 @@ export default class API_Connection {
             console.log("Successfully posted data:", data)
         })
         .catch((error) => {
-            this.handleError(error.request.statusText);
+            this.handleError(error);
         })
     }
 
@@ -110,7 +110,7 @@ export default class API_Connection {
             console.log("Successfully posted data: ", data)
         })
         .catch((error) => {
-            this.handleError(error.request.statusText);
+            this.handleError(error);
         })
     }
 
@@ -125,7 +125,26 @@ export default class API_Connection {
             return(this.categories);
         })
         .catch((error) => {
-            this.handleError(error.request.statusText);
+            this.handleError(error);
+        })
+    }
+
+    async post_logout(){
+        const data = {
+            refresh_token : this.refreshToken,
+            access_token : this.token,
+        }
+        const res = await axios.post(this.logoutUrl, data, {
+            'Content-Type' : 'text/json',
+            headers: {
+                "Authorization": `Bearer ${this.token}`
+            }
+        })
+        .then((res) => {
+            console.log("Successfully logged out of server: ", res.status)
+        })
+        .catch((error) => {
+            this.handleError(error)
         })
     }
 }

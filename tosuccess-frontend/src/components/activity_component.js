@@ -41,6 +41,8 @@ class ActivityComponent extends Component{
             date_to_view : new Date(),
             dayNumber_to_view : null,
 
+            activities : null,
+
             colorList : {},
         }
 
@@ -64,36 +66,75 @@ class ActivityComponent extends Component{
     }
 
     componentDidMount(){
-        this.getDateFromServer()
+        this.initGet()
     }
 
 
-    getDateFromServer(){ 
-        //Handle data needed from API
+//TODO : Make a more elegant sulution here.... (Try to use the functions)
+//------------------Server stuff----------------------------------------------
+    initGet(){
         this.api_connection.get_current_date()
         .then((response) => {
             this.currentdate = this.api_connection.date.date;
             this.currentDayNumber = this.api_connection.date.daynumber;
+            this.setState({date_to_view : this.currentdate, dayNumber_to_view : this.currentDayNumber})
             this.api_connection.get_categories().then((res) => {
                 this.categories = this.api_connection.categories;
-                this.setState({ date_to_view : this.currentdate, dayNumber_to_view : this.currentDayNumber, loading_data_from_api : false, colorList : this.createColorList(this.categories) })
+                this.setState({ colorList : this.createColorList(this.categories) })
+                this.api_connection.get_activities(this.state.dayNumber_to_view, 4)
+                .then((response) => {
+                    this.setState({ activities : this.api_connection.activities, loading_data_from_api : false})
+                });
             });
         })
-        //Error handling
-        .catch((err) =>{ //Fires because this.currentdate is not defined if we are not authorized
-            this.api_connection.sendRefreshToken() //Send refresh token
-            .then((response) => {
-                console.log("Error. Trying again")
-                this.getDateFromServer() //If successfully retrieved token. Try again
+        .catch(() => {
+            this.api_connection.sendRefreshToken()
+            .then(() => {
+                this.initGet()
             })
-            .catch((error) => {
-                this.handleServerError() //If not display error
+            .catch(() => {
+                this.setState({ server_error : true, error_message : this.api_connection.errorMessage });
             })
+        })
+    }
+
+    GET_date(){
+        this.api_connection.get_current_date()
+        .then((response) => {
+            this.currentdate = this.api_connection.date.date;
+            this.currentDayNumber = this.api_connection.date.daynumber;
+            this.setState({date_to_view : this.currentdate, dayNumber_to_view : this.currentDayNumber})
+        })
+        .catch(()=> {
+            this.handleServerError(this.GET_date)
         });
     }
 
-    handleServerError(){
-        this.setState({ server_error : true, error_message : this.api_connection.errorMessage });
+    async GET_categories(){
+        this.api_connection.get_categories().then((res) => {
+            this.categories = this.api_connection.categories;
+            this.setState({ colorList : this.createColorList(this.categories) })
+            return res
+        });
+    }
+
+    async GET_activities(){
+        this.setState({ loading_data_from_api : true })
+        this.api_connection.get_activities(this.state.dayNumber_to_view, 4)
+        .then((response) => {
+            this.setState({ activities : this.api_connection.activities, loading_data_from_api : false})
+        });
+    }
+
+    async handleServerError(functionToRetry){
+        this.api_connection.sendRefreshToken()
+        .then(() => {
+            functionToRetry()
+        })
+        .catch(() => {
+            this.setState({ server_error : true, error_message : this.api_connection.errorMessage });
+        })
+
     }
 
     //Handle input in fab
@@ -113,6 +154,7 @@ class ActivityComponent extends Component{
         var end_time = this.dateHandler.convertTimeToMinutes(this.state.activityEndTime);
         this.api_connection.post_activity(this.state.activityName, this.state.activityCategory, start_time, end_time, dayNumber, date)
         .then(() => {
+            this.GET_activities();
             this.handleModalShowHide();
         })
         .catch(() => {
@@ -160,7 +202,7 @@ class ActivityComponent extends Component{
                     <h1>Here are your activities for the next 4 days!</h1>
                     <DatePicker value={this.state.date_to_view} label="Date:" onChange={e=> this.setState({ date_to_view : e.target.value, dayNumber_to_view : this.dateHandler.convertDateToDayNumber(e.target.value) })}/>
                     {/* The rest of the page */}
-                    <ActivityTable backendAccessToken={this.state.backend_access_token} api_connection={this.api_connection} day_number_to_view={this.state.dayNumber_to_view} colorList={this.state.colorList}/>
+                    <ActivityTable activities={this.state.activities} backendAccessToken={this.state.backend_access_token} day_number_to_view={this.state.dayNumber_to_view} colorList={this.state.colorList}/>
                     <AddActivityButton handleClick={() => this.handleModalShowHide()} />
 
                     {/* Modal */}

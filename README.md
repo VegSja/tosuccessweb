@@ -23,4 +23,6 @@ There are a few goals for this project. Firstly there are goals to reach a MVP, 
     - Display statitics with different diagrams
 
 # Images
-As the design is still being worked on, images will be added at a later date
+Keep in mind that the design of the website is still a work in progress, as the functionality of the website has been the main focus.
+
+![The landing page](/website_imgs/landingpage.png)

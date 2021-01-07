@@ -1,23 +1,23 @@
 {
   "files": {
     "main.css": "/tosuccessweb/static/css/main.a843fba1.chunk.css",
-    "main.js": "/tosuccessweb/static/js/main.fc91c50a.chunk.js",
-    "main.js.map": "/tosuccessweb/static/js/main.fc91c50a.chunk.js.map",
+    "main.js": "/tosuccessweb/static/js/main.29de27db.chunk.js",
+    "main.js.map": "/tosuccessweb/static/js/main.29de27db.chunk.js.map",
     "runtime-main.js": "/tosuccessweb/static/js/runtime-main.bfd8758c.js",
     "runtime-main.js.map": "/tosuccessweb/static/js/runtime-main.bfd8758c.js.map",
-    "static/js/2.85eddf32.chunk.js": "/tosuccessweb/static/js/2.85eddf32.chunk.js",
-    "static/js/2.85eddf32.chunk.js.map": "/tosuccessweb/static/js/2.85eddf32.chunk.js.map",
+    "static/js/2.e801c591.chunk.js": "/tosuccessweb/static/js/2.e801c591.chunk.js",
+    "static/js/2.e801c591.chunk.js.map": "/tosuccessweb/static/js/2.e801c591.chunk.js.map",
     "static/js/3.5ff67e3e.chunk.js": "/tosuccessweb/static/js/3.5ff67e3e.chunk.js",
     "static/js/3.5ff67e3e.chunk.js.map": "/tosuccessweb/static/js/3.5ff67e3e.chunk.js.map",
     "index.html": "/tosuccessweb/index.html",
     "static/css/main.a843fba1.chunk.css.map": "/tosuccessweb/static/css/main.a843fba1.chunk.css.map",
-    "static/js/2.85eddf32.chunk.js.LICENSE.txt": "/tosuccessweb/static/js/2.85eddf32.chunk.js.LICENSE.txt",
+    "static/js/2.e801c591.chunk.js.LICENSE.txt": "/tosuccessweb/static/js/2.e801c591.chunk.js.LICENSE.txt",
     "static/media/conquer.ece66679.jpg": "/tosuccessweb/static/media/conquer.ece66679.jpg"
   },
   "entrypoints": [
     "static/js/runtime-main.bfd8758c.js",
-    "static/js/2.85eddf32.chunk.js",
+    "static/js/2.e801c591.chunk.js",
     "static/css/main.a843fba1.chunk.css",
-    "static/js/main.fc91c50a.chunk.js"
+    "static/js/main.29de27db.chunk.js"
   ]
 }

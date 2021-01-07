@@ -33,6 +33,9 @@ There are a few goals for this project. Firstly there are goals to reach a MVP, 
 - Get statitics
     - Get statitics from backend
     - Display statitics with different diagrams
+- Improve UI
+    - Animations
+    - More work on colors and pictures
 
 # Images
 Keep in mind that the design of the website is still a work in progress, as the functionality of the website has been the main focus.

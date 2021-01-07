@@ -25,35 +25,10 @@ export default class ActivityTable extends Component{
             day_number_to_view : this.props.day_number_to_view,
 
             colorList : this.props.colorList,
+
+            activities : sort_array_based_on_key(this.props.activities, "date"),
         }   
         this.dateHandler = new DateHandler();
-        console.log("Activity table constructed")
-    }
-
-    componentDidMount(){
-        console.log("Activity table mounted")
-        this.sendGetRequest()
-    }
-
-    componentDidUpdate(){
-        console.log("Component updated")
-    }
-
-    componentDidUpdate(){
-        if(this.props.day_number_to_view != this.state.day_number_to_view){
-            this.setState({day_number_to_view : this.props.day_number_to_view, loading : true})
-        }
-        else if(this.props.day_number_to_view == this.state.day_number_to_view && this.state.loading){
-            this.sendGetRequest()
-        }
-    }
-
-    sendGetRequest(){
-        this.state.api_connection.get_activities(this.state.day_number_to_view, 4).then((response) => {
-            this.activities = this.state.api_connection.activities;
-            this.activities = sort_array_based_on_key(this.activities, "date");
-            this.setState({ loading: false });
-        });
     }
 
     //Creates 'dict' with data from JSON
@@ -70,7 +45,7 @@ export default class ActivityTable extends Component{
 
     //Use create a activity card based on data from object
     renderDays(){
-        var activities = this.CreateActivityObject(this.activities);
+        var activities = this.CreateActivityObject(this.state.activities);
         var items = [];
         for(const key in activities){
             items.push(<th><Day date={key} activities_for_day={activities[key]} colorList={this.state.colorList} /></th>);
@@ -82,18 +57,10 @@ export default class ActivityTable extends Component{
     }
 
     render(){
-        if(this.state.loading){
-            return (
-                <div className="table-div">
-                    <Spinner animation="grow" className="loading-table" />
-                </div>
-            )
-        }else {
-            return(
-                <div className="table-div">
-                    <Table> {this.renderDays()} </Table>
-                </div>
-            )
-        }
+        return(
+            <div className="table-div">
+                <Table> {this.renderDays()} </Table>
+            </div>
+        )
     }
 }

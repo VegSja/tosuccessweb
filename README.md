@@ -1,3 +1,6 @@
+# Where to find
+The website can be viewed at https://vegsja.github.io/tosuccessweb/#/
+
 # About
 This is the website for the ToSuccess project - A project focused on making scheduling and daily planning easier.
 

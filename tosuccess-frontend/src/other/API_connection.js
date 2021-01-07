@@ -24,6 +24,7 @@ export default class API_Connection {
         console.log("Error from server: ", errorMessage)
         this.errorFromServer = true;
         this.errorMessage = errorMessage;
+        throw errorMessage;
     }
 
     async sendRefreshToken(){
@@ -42,7 +43,6 @@ export default class API_Connection {
     }
 
     async get_current_date(){
-        console.log("Token in API connection:", this.token)
         const res = await axios.get(this.url_date, {
             headers: {
                 "Authorization": `Bearer ${this.token}` 
@@ -100,7 +100,6 @@ export default class API_Connection {
             name: name,
             color: color,
         }
-        alert(this.token)
         const res = await axios.post(this.url_categories, data, {
             'Content-Type': 'text/json',
             headers : {
@@ -124,6 +123,9 @@ export default class API_Connection {
         .then((res) => {
             this.categories = res.data;
             return(this.categories);
+        })
+        .catch((error) => {
+            this.handleError(error.request.statusText);
         })
     }
 }

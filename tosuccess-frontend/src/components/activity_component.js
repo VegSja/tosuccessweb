@@ -55,6 +55,10 @@ class ActivityComponent extends Component{
         this.state.backend_access_token = routeState.backend_access_token; //Does this to avoid update of page
         this.state.backend_refresh_token = routeState.backend_refresh_token;
 
+
+        //Need to bind "this"
+        this.submitHandler = this.submitHandler.bind(this)
+
         this.api_connection = new API_Connection(this.state.backend_access_token, this.state.backend_refresh_token); //We still keep this object and pass it into the table. Still need it to post
         this.dateHandler = new DateHandler();
     }
@@ -107,8 +111,20 @@ class ActivityComponent extends Component{
         var dayNumber = this.dateHandler.convertDateToDayNumber(this.state.activityDate);
         var start_time = this.dateHandler.convertTimeToMinutes(this.state.activityStartTime);
         var end_time = this.dateHandler.convertTimeToMinutes(this.state.activityEndTime);
-        this.api_connection.post_activity(this.state.activityName, this.state.activityCategory, start_time, end_time, dayNumber, date);
-        //this.handleModalShowHide();
+        this.api_connection.post_activity(this.state.activityName, this.state.activityCategory, start_time, end_time, dayNumber, date)
+        .then(() => {
+            this.handleModalShowHide();
+        })
+        .catch(() => {
+            this.api_connection.sendRefreshToken()//Get new access token
+            .then(() => {
+                this.submitHandler() //Try again
+            })
+            .catch(() => {
+                alert("Could not send activitiy")
+            })
+        });
+
     }
 
     createColorList(categories){
@@ -153,7 +169,7 @@ class ActivityComponent extends Component{
                         <Modal.Header closeButton onClick={() => this.handleModalShowHide()}>
                         <Modal.Title>Add activity</Modal.Title>
                         </Modal.Header>
-                        <Form onSubmit={this.submitHandler}>
+                        <Form>
                             <Modal.Body>
                                 <FormGroup controlId="formActivityName">
                                     <Form.Label>Activity Name:</Form.Label>

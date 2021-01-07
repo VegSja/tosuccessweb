@@ -1,7 +1,7 @@
 import {React, Component} from 'react';
 
 //Bootstrap imports
-import {Table, Spinner, Alert, Form} from 'react-bootstrap';
+import {Table, Spinner, Alert} from 'react-bootstrap';
 
 import Day from './day';
 
@@ -14,7 +14,7 @@ import DateHandler from "../other/dateHandler"
 
 import "../style/activity_page.css"
 
-
+//TODO : Figure out why this doesnt rerender
 export default class ActivityTable extends Component{
     constructor(props){
         super(props)
@@ -26,14 +26,17 @@ export default class ActivityTable extends Component{
 
             colorList : this.props.colorList,
         }   
-        this.dateHandler = new DateHandler();     
-            //TODO: Test backendaccess. Wait till connection is authorized before doing anything else
-        //API connection data retrieval
-
+        this.dateHandler = new DateHandler();
+        console.log("Activity table constructed")
     }
 
     componentDidMount(){
+        console.log("Activity table mounted")
         this.sendGetRequest()
+    }
+
+    componentDidUpdate(){
+        console.log("Component updated")
     }
 
     componentDidUpdate(){

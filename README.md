@@ -4,6 +4,15 @@ The website can be viewed at https://vegsja.github.io/tosuccessweb/#/
 # About
 This is the website for the ToSuccess project - A project focused on making scheduling and daily planning easier.
 
+## How it is made
+### Design
+For the webpage itself ReactJS, Bootstrap are used, in addition to normal Javascript, HTML and CSS
+
+### Communications with REST-API
+To send GET/POST requests to the REST-API (see [The GitHub page of the backend](https://github.com/VegSja/ToSuccessBackend) for more information) the website uses the package Axios.
+
+Authorization with the backend is completed wtih oAuth Google sign in and the backend uses a token/refresh token system to keep the user signed in. See [The GitHub page of the backend](https://github.com/VegSja/ToSuccessBackend) for more information
+
 # Goals
 There are a few goals for this project. Firstly there are goals to reach a MVP, secondly there are goals regarding non-essantials features.
 

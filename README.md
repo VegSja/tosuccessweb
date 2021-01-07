@@ -35,3 +35,11 @@ Keep in mind that the design of the website is still a work in progress, as the 
 
 ### Categories page
 ![Categories page](/website_imgs/categories_filled.png)
+
+## Adding to database
+
+### Add activity
+![Add activity](/website_imgs/homepage_add.png)
+
+### Add category
+![Add category](/website_imgs/add_category.png)

@@ -70,22 +70,19 @@ class ActivityComponent extends Component{
     }
 
 
-//TODO : Make a more elegant sulution here....
+//TODO : Make a more elegant sulution here.... (Try to use the functions)
 //------------------Server stuff----------------------------------------------
     initGet(){
-        console.log("Sending GET date")
         this.api_connection.get_current_date()
         .then((response) => {
             this.currentdate = this.api_connection.date.date;
             this.currentDayNumber = this.api_connection.date.daynumber;
             this.setState({date_to_view : this.currentdate, dayNumber_to_view : this.currentDayNumber})
             this.api_connection.get_categories().then((res) => {
-                console.log("Successfully fetched categoreis", this.api_connection.categories)
                 this.categories = this.api_connection.categories;
                 this.setState({ colorList : this.createColorList(this.categories) })
                 this.api_connection.get_activities(this.state.dayNumber_to_view, 4)
                 .then((response) => {
-                    console.log("Successfully fetched activities: ", this.api_connection.activities, this.state.dayNumber_to_view, response)
                     this.setState({ activities : this.api_connection.activities, loading_data_from_api : false})
                 });
             });
@@ -102,12 +99,10 @@ class ActivityComponent extends Component{
     }
 
     GET_date(){
-        console.log("Sending GET date")
         this.api_connection.get_current_date()
         .then((response) => {
             this.currentdate = this.api_connection.date.date;
             this.currentDayNumber = this.api_connection.date.daynumber;
-            console.log("Successfully retrieved date")
             this.setState({date_to_view : this.currentdate, dayNumber_to_view : this.currentDayNumber})
         })
         .catch(()=> {
@@ -116,9 +111,7 @@ class ActivityComponent extends Component{
     }
 
     async GET_categories(){
-        console.log("Sending GET Categories")
         this.api_connection.get_categories().then((res) => {
-            console.log("Successfully fetched categoreis", this.api_connection.categories)
             this.categories = this.api_connection.categories;
             this.setState({ colorList : this.createColorList(this.categories) })
             return res
@@ -126,11 +119,9 @@ class ActivityComponent extends Component{
     }
 
     async GET_activities(){
-        console.log("Sending GET activities", this.state.dayNumber_to_view)
         this.setState({ loading_data_from_api : true })
         this.api_connection.get_activities(this.state.dayNumber_to_view, 4)
         .then((response) => {
-            console.log("Successfully fetched activities: ", this.api_connection.activities, this.state.dayNumber_to_view, response)
             this.setState({ activities : this.api_connection.activities, loading_data_from_api : false})
         });
     }

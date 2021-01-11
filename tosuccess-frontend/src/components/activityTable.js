@@ -48,7 +48,7 @@ export default class ActivityTable extends Component{
         var activities = this.CreateActivityObject(this.state.activities);
         var items = [];
         for(const key in activities){
-            items.push(<th><Day date={key} activities_for_day={activities[key]} colorList={this.state.colorList} /></th>);
+            items.push(<th><Day date={key} activities_for_day={activities[key]} colorList={this.state.colorList} api={this.props.api}/></th>);
         }
         if (items.length == 0){
             return (<Alert variant='warning'>ALERT: No activities found for these days. To add an activity click the add button</Alert>)

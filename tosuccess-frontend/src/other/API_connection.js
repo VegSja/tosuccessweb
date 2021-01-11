@@ -7,6 +7,7 @@ export default class API_Connection {
         this.url_date = "https://vegsja.pythonanywhere.com/date/"
         this.url_refresh = "https://vegsja.pythonanywhere.com/refresh/"
         this.logoutUrl = "https://vegsja.pythonanywhere.com/logout/"
+        this.delete_url = "https://vegsja.pythonanywhere.com/delete/"
         this.token = token;
         this.refreshToken = refreshToken;
 
@@ -92,6 +93,17 @@ export default class API_Connection {
         })
         .catch((error) => {
             this.handleError(error);
+        })
+    }
+
+    async delete_activity(activity_id){
+        const res = await axios.delete(this.url_activities + activity_id + "/", {
+            headers: {
+                "Authorization": `Bearer ${this.token}`
+            }
+        })
+        .catch((error) => {
+            this.handleError(error)
         })
     }
 

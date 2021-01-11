@@ -166,7 +166,6 @@ class ActivityComponent extends Component{
                 alert("Could not send activitiy")
             })
         });
-
     }
 
     createColorList(categories){
@@ -202,7 +201,7 @@ class ActivityComponent extends Component{
                     <h1>Here are your activities for the next 4 days!</h1>
                     <DatePicker value={this.state.date_to_view} label="Date:" onChange={e=> this.setState({ date_to_view : e.target.value, dayNumber_to_view : this.dateHandler.convertDateToDayNumber(e.target.value) })}/>
                     {/* The rest of the page */}
-                    <ActivityTable activities={this.state.activities} backendAccessToken={this.state.backend_access_token} day_number_to_view={this.state.dayNumber_to_view} colorList={this.state.colorList}/>
+                    <ActivityTable api={this.api_connection} activities={this.state.activities} backendAccessToken={this.state.backend_access_token} day_number_to_view={this.state.dayNumber_to_view} colorList={this.state.colorList}/>
                     <AddActivityButton handleClick={() => this.handleModalShowHide()} />
 
                     {/* Modal */}

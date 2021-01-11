@@ -48,7 +48,6 @@ export default class ActivityCard extends Component{
                     <DeleteButton onClick={() => this.deleteClick()}/>
                 </Card.Title>
                 <Card.Subtitle className="activity-name">{this.props.activity_name}</Card.Subtitle>
-                {this.unique_id}
             </Card.Body>
             </Card>
         )

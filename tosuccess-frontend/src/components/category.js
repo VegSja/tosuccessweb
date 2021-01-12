@@ -15,7 +15,7 @@ export default class Category extends Component{
     }
 
     onDelete(){
-        this.api.delete_category(this.unique_id)
+        this.api.delete_category(this.state.unique_id)
         .then(() => {
             //Refresh
             window.location.reload();

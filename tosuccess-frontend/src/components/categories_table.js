@@ -1,7 +1,7 @@
 import { React, Component } from 'react' 
 import { Table} from 'react-bootstrap'
 
-import ColorCircle from './color_circle'
+import Category from './category'
 
 export default class CategoriesTable extends Component{
     constructor(props){
@@ -21,10 +21,7 @@ export default class CategoriesTable extends Component{
         var items = []
         for(var categories in this.state.categories){
             var category_son = this.state.categories[categories]
-            items.push(<tr>
-                <th><ColorCircle color={category_son.color} size={"5vh"}/></th>
-                <th><h3>{category_son.name}</h3></th>
-            </tr>)
+            items.push(<Category color={category_son.color} name={category_son.name} unique_id={category_son.unique_id} api={this.state.api_connection}/>)
         }
         return items
     }
@@ -33,10 +30,6 @@ export default class CategoriesTable extends Component{
         return(
             <Table hover>
                 <thead>
-                    <tr>
-                        <th>Color</th>
-                        <th>Name</th>
-                    </tr>
                 </thead>
                 <tbody>
                         {this.render_categories()}

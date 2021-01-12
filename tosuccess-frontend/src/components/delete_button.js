@@ -7,7 +7,7 @@ export default class DeleteButton extends Component {
     render(){
         const style = {
             margin:"auto",
-            position: "absolute",
+            position: this.props.position,
             right: "1%",
             top:"5%"
         }

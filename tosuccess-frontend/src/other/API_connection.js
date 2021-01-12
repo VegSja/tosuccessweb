@@ -141,6 +141,17 @@ export default class API_Connection {
         })
     }
 
+    async delete_category(category_id){
+        const res = await axios.delete(this.url_categories + category_id + "/", {
+            headers: {
+                "Authorization": `Bearer ${this.token}`
+            }
+        })
+        .catch((error) => {
+            this.handleError(error)
+        })
+    }
+
     async post_logout(){
         const data = {
             refresh_token : this.refreshToken,

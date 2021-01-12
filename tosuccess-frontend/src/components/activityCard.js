@@ -45,7 +45,7 @@ export default class ActivityCard extends Component{
                 <Card.Title>
                     <CategoryDisplay category={this.props.activity_category} color={this.props.color} position_style="absolute"/>
                         {this.start_time} - {this.end_time}
-                    <DeleteButton onClick={() => this.deleteClick()}/>
+                    <DeleteButton onClick={() => this.deleteClick()} position="absolute"/>
                 </Card.Title>
                 <Card.Subtitle className="activity-name">{this.props.activity_name}</Card.Subtitle>
             </Card.Body>

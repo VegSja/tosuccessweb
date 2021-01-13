@@ -1,8 +1,13 @@
 import React from "react";
+import PieChart from "../components/Stats_Page/Graphs/pie_chart"
 
 
-export default function Stats(){
+export default function Stats(){    
+
     return(
-        <h1>Stats</h1>
+        <div>
+            <h1>Stats</h1>
+            <PieChart />
+        </div>
     );
 }

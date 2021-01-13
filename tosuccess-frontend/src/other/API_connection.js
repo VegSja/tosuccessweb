@@ -80,20 +80,23 @@ export default class API_Connection {
             minutes_after_midnight_start: minutes_start,
             minutes_after_midnight_end: minutes_end,
             date: dayNumber,
-            date_string: date_string,
+            date_string: date_string
         }
-        const res = await axios.post(this.url_activities, data, {
-            'Content-Type': 'text/json',
-            headers: {
-                "Authorization": `Bearer ${this.token}`
-            }
-        })
-        .then((res) => {
-            console.log("Successfully posted data:", data)
-        })
-        .catch((error) => {
-            this.handleError(error);
-        })
+
+            const res = await axios.post(this.url_activities, data, {
+                'Content-Type': 'text/json',
+                headers: {
+                    "Authorization": `Bearer ${this.token}`
+                },
+                timeout : 2000,
+            })
+            .then((res) => {
+                console.log("Successfully posted data:", data)
+            })
+            .catch((error) => {
+                console.log("Failed to post activity: ", error.request.statusText)
+                this.handleError(error);
+            })
     }
 
     async delete_activity(activity_id){
@@ -116,7 +119,8 @@ export default class API_Connection {
             'Content-Type': 'text/json',
             headers : {
                 "Authorization": `Bearer ${this.token}`
-            }
+            },
+            timeout : 2000,
         })
         .then((res) =>{
             console.log("Successfully posted data: ", data)
@@ -124,6 +128,7 @@ export default class API_Connection {
         .catch((error) => {
             this.handleError(error);
         })
+        console.log("Escaped")
     }
 
     async get_categories(){

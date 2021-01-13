@@ -169,8 +169,10 @@ class ActivityComponent extends Component{
         var end_time = this.dateHandler.convertTimeToMinutes(this.state.activityEndTime);
         this.api_connection.post_activity(this.state.activityName, this.state.activityCategory, start_time, end_time, dayNumber, date)
         .then(() => {
-            this.GET_activities();
-            this.handleModalShowHide();
+            this.GET_activities()
+            .then(() => {
+                this.handleModalShowHide();
+            })
         })
         .catch(() => {
             this.api_connection.sendRefreshToken()//Get new access token

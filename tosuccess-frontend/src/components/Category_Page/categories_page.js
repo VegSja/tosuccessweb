@@ -68,6 +68,7 @@ export default class CategoriesPage extends Component{
     }
 
     handleModalShowHide(){
+        this.API.sendRefreshToken()
         this.setState({ showHide : !this.state.showHide })
     }
 
@@ -75,23 +76,26 @@ export default class CategoriesPage extends Component{
         this.setState({ category_color : color.hex })
     }
 
-    submitHandler(){
+    submitHandler = event => {
         this.API.post_category(this.state.category_name, this.state.category_color)
-        .then(() => {
+        .then((response) => {
+            console.log("Success:", response)
             this.setState({ loading : true })
             this.handleModalShowHide()
             this.sendGetRequest()
+            return
         })
         .catch(() => {
             this.API.sendRefreshToken() //If not successfull, send refresh token and get new access token
             .then(() => {
-                console.log("Successfully posted category")
                 this.submitHandler()
+                return
             })
             .catch(() => {
-                console.log("Caught an error while sending refresh token")
+                return
             })
         })
+        event.preventDefault() //Leave this to hinder reload, which inturn will fix post on start 
     }
 
     render(){
@@ -136,7 +140,7 @@ export default class CategoriesPage extends Component{
                                         <Button variant="secondary" onClick={() => this.handleModalShowHide()}>
                                             Close
                                         </Button>
-                                        <Button variant="primary" type="submit" onClick={() => this.submitHandler()}>
+                                        <Button variant="primary" type="submit" onClick={this.submitHandler}>
                                             Add Category
                                         </Button>
                                     </Modal.Footer>

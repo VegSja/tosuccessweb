@@ -88,7 +88,7 @@ export default class API_Connection {
                 headers: {
                     "Authorization": `Bearer ${this.token}`
                 },
-                timeout : 2000,
+                timeout : 30000,
             })
             .then((res) => {
                 console.log("Successfully posted data:", data)
@@ -111,24 +111,28 @@ export default class API_Connection {
     }
 
     async post_category(name, color){
+        this.sendRefreshToken()
         const data = {
             name: name,
-            color: color,
+            color: color
         }
         const res = await axios.post(this.url_categories, data, {
             'Content-Type': 'text/json',
             headers : {
                 "Authorization": `Bearer ${this.token}`
             },
-            timeout : 2000,
+            timeout : 30000,
         })
         .then((res) =>{
             console.log("Successfully posted data: ", data)
+            return
         })
         .catch((error) => {
             this.handleError(error);
         })
-        console.log("Escaped")
+        .finally(() => {
+            console.log("Everything else failed")
+        })
     }
 
     async get_categories(){

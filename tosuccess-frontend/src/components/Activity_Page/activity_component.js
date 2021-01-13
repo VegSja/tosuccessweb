@@ -161,7 +161,7 @@ class ActivityComponent extends Component{
         this.GET_activities()
     }
 
-    submitHandler(){
+    submitHandler = event => {
         //This is where you handle the input given. The previous functions should have changed the states to reflect the value inputed. Just use this.state.activityName for instance
         var date = this.dateHandler.convertDateToDDMMMMYYYY(this.state.activityDate);
         var dayNumber = this.dateHandler.convertDateToDayNumber(this.state.activityDate);
@@ -180,9 +180,10 @@ class ActivityComponent extends Component{
                 this.submitHandler() //Try again
             })
             .catch(() => {
-                alert("Could not send activitiy")
             })
         });
+
+        event.preventDefault() //Leave this to hinder reload, which inturn will fix post on start 
     }
 
     createColorList(categories){
@@ -251,7 +252,7 @@ class ActivityComponent extends Component{
                                 <Button variant="secondary" onClick={() => this.handleModalShowHide()}>
                                     Close
                                 </Button>
-                                <Button variant="primary" type="submit" onClick={() => this.submitHandler()}>
+                                <Button variant="primary" type="submit" onClick={this.submitHandler}>
                                     Add Activity
                                 </Button>
                             </Modal.Footer>

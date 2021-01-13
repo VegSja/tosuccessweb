@@ -9,10 +9,10 @@ import Day from './day';
 
 
 //Non-react classes
-import sort_array_based_on_key from "../other/sorting"
-import DateHandler from "../other/dateHandler"
+import sort_array_based_on_key from "../../other/sorting"
+import DateHandler from "../../other/dateHandler"
 
-import "../style/activity_page.css"
+import "../../style/activity_page.css"
 
 //TODO : Figure out why this doesnt rerender
 export default class ActivityTable extends Component{

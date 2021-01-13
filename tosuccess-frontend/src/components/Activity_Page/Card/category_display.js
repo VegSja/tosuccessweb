@@ -1,6 +1,6 @@
 import {React, Component} from 'react'
 
-import ColorCircle from './color_circle'
+import ColorCircle from '../../Category_Page/color_circle'
 
 export default class CategoryDisplay extends Component{
     constructor(props){

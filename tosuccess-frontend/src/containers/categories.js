@@ -1,6 +1,6 @@
 import React from "react";
 
-import CategoriesPage from '../components/categories_page';
+import CategoriesPage from '../components/Category_Page/categories_page';
 
 import '../style/activity_page.css';
 

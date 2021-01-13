@@ -4,10 +4,10 @@ import {React, Component} from 'react';
 import {Card} from 'react-bootstrap';
 
 import CategoryDisplay from './category_display'
-import DeleteButton from './delete_button'
+import DeleteButton from '../../Input/delete_button'
 
 //Other imports
-import DateHandler from '../other/dateHandler';
+import DateHandler from '../../../other/dateHandler';
 
 
 export default class ActivityCard extends Component{

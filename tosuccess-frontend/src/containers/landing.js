@@ -1,7 +1,7 @@
 import React from "react";
 
 import {Button} from 'react-bootstrap';
-import Login from '../components/login.js';
+import Login from '../components/Input/Session/login.js';
 
 import { LinkContainer } from "react-router-bootstrap";
 

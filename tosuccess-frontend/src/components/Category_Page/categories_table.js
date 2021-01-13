@@ -2,7 +2,7 @@ import { React, Component } from 'react'
 import { Table} from 'react-bootstrap'
 
 import Category from './category'
-import sort_array_based_on_key from '../other/sorting'
+import sort_array_based_on_key from '../../other/sorting'
 
 export default class CategoriesTable extends Component{
     constructor(props){

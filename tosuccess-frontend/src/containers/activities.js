@@ -1,6 +1,6 @@
 import React from "react";
 
-import ActivityComponent from '../components/activity_component';
+import ActivityComponent from '../components/Activity_Page/activity_component';
 
 import '../style/activity_page.css';
 

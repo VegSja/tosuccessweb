@@ -2,8 +2,8 @@ import { React, Component} from 'react'
 
 import { Dropdown, DropdownButton } from 'react-bootstrap'
 
-import ColorCircle from './color_circle'
-import CategoryDisplay from './category_display'
+import ColorCircle from '../Category_Page/color_circle'
+import CategoryDisplay from '../Activity_Page/Card/category_display'
 
 export default class CategoryDropdown extends Component{
     constructor(props){

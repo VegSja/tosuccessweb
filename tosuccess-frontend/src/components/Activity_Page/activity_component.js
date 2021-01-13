@@ -1,9 +1,9 @@
 //Components
-import ActivityTable from '../components/activityTable';
-import AddActivityButton from '../components/add_activity_button';
-import DatePicker from "./date_picker"
-import CategoryDropdown from "./category_dropdown"
-import ToastMessage from './toast_message'
+import ActivityTable from './activityTable';
+import AddActivityButton from '../Input/add_activity_button';
+import DatePicker from "../Modals/date_picker"
+import CategoryDropdown from "../Modals/category_dropdown"
+import ToastMessage from '../toast_message'
 
 import {Button, Modal, Form, Spinner, Alert} from 'react-bootstrap';
 
@@ -14,8 +14,8 @@ import { FormGroup } from '@material-ui/core';
 import { withRouter, Redirect } from "react-router";
 
 //Non-react classes
-import API_Connection from "../other/API_connection"
-import DateHandler from "../other/dateHandler"
+import API_Connection from "../../other/API_connection"
+import DateHandler from "../../other/dateHandler"
 
 //TODO: Change format of date so that backends accepts
 class ActivityComponent extends Component{

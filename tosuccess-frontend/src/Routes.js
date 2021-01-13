@@ -9,7 +9,7 @@ import Landing from './containers/landing';
 import Stats from './containers/stats';
 import Settings from './containers/settings';
 import Categories from './containers/categories';
-import ActivityComponent from './components/activity_component';
+import ActivityComponent from './components/Activity_Page/activity_component';
 
 export default function Routes() {
   return (

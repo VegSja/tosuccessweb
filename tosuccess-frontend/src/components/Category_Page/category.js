@@ -1,7 +1,7 @@
 import {React, Component} from 'react'
 
 import ColorCircle from './color_circle'
-import DeleteButton from './delete_button'
+import DeleteButton from '../Input/delete_button'
 
 export default class Category extends Component{
     constructor(props){

@@ -4,7 +4,7 @@ import { Button } from 'react-bootstrap';
 
 import { useHistory } from "react-router-dom";
 
-import API_Connection from "../other/API_connection"
+import API_Connection from "../../../other/API_connection"
 
 const axios = require('axios')
 

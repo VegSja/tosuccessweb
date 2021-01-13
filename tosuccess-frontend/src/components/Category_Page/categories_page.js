@@ -1,13 +1,13 @@
 import {React, Component} from "react";
 import { Redirect } from 'react-router'
 
-import AddActivityButton from "../components/add_activity_button"
-import ColorPicker from "../components/colorPicker"
-import CategoriesTable from "../components/categories_table"
+import AddActivityButton from "../Input/add_activity_button"
+import ColorPicker from "../Modals/colorPicker"
+import CategoriesTable from "./categories_table"
 
 import {Button, Modal, Form, FormGroup, Spinner, Alert} from 'react-bootstrap';
 
-import API_Connection from '../other/API_connection'
+import API_Connection from '../../other/API_connection'
 
 
 export default class CategoriesPage extends Component{

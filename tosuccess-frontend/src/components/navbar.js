@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 
 //Bootstrap imports
 import {Nav, Navbar, Form, Button} from 'react-bootstrap';
-import Logout from './logout';
+import Logout from './Input/Session/logout';
 
 //Routing imports
 import { LinkContainer } from "react-router-bootstrap";

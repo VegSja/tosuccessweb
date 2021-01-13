@@ -11,6 +11,13 @@ export default class CategoryDropdown extends Component{
         this.state = {
             api_data : this.props.data,
             selected_value : null,
+            title : this.props.title,
+        }
+    }
+
+    componentDidUpdate(prevProps){
+        if(prevProps.title !== this.props.title){
+            this.setState({title : this.props.title})
         }
     }
 
@@ -30,10 +37,20 @@ export default class CategoryDropdown extends Component{
     }
 
     render(){
-        return(
-            <DropdownButton style={{ position : "relative", display : "inline-block"}} title="Categories" onSelect={this.props.onSelect}>
-                {this.createSelectItems()}
-            </DropdownButton>
-        )
+        if (this.state.title === ""){
+            return(
+                <DropdownButton style={{ position : "relative", display : "inline-block"}} title="Category" onSelect={this.props.onSelect}>
+                    {this.createSelectItems()}
+                </DropdownButton>
+            )
+        }
+        else {
+            return(
+                <DropdownButton style={{ position : "relative", display : "inline-block"}} title={this.state.title} onSelect={this.props.onSelect}>
+                    {this.createSelectItems()}
+                </DropdownButton>
+            )
+        }
+
     }
 }

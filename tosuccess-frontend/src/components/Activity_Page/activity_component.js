@@ -148,7 +148,7 @@ class ActivityComponent extends Component{
 
     //Handle input in fab
     handleModalShowHide() {
-        this.setState({ showHide: !this.state.showHide })
+        this.setState({ showHide: !this.state.showHide, activityCategory : "" })
     }
 
     onDropdownSelect(eventkey, event){
@@ -230,7 +230,7 @@ class ActivityComponent extends Component{
                                 <FormGroup controlId="formActivityName">
                                     <Form.Label>Activity Name:</Form.Label>
                                     <Form.Control type="string" placeholder="Enter activity name..." style={{width : "fit-content", display : "inline-block"}} onChange={e => this.setState({ activityName: e.target.value })}/>
-                                    <CategoryDropdown data={this.categories} onSelect={(key, event) => this.onDropdownSelect(key, event)}/>
+                                    <CategoryDropdown data={this.categories} onSelect={(key, event) => this.onDropdownSelect(key, event)} title={this.state.activityCategory}/>
                                 </FormGroup>
                                 <FormGroup controlId="formDate">
                                     <Form.Label>Date:</Form.Label>

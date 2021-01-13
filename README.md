@@ -4,6 +4,11 @@ The website can be viewed at https://vegsja.github.io/tosuccessweb/#/
 # About
 This is the website for the ToSuccess project - A project focused on making scheduling and daily planning easier.
 
+# Known bugs
+- Submitting doesnt work straigth after reload
+- Deleting an activity on another date than today's reloads you to todays view
+
+
 ## How it is made
 ### Design
 For the webpage itself ReactJS, Bootstrap are used, in addition to normal Javascript, HTML and CSS

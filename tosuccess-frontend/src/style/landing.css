@@ -13,3 +13,12 @@
     padding: 1vw;
     padding-top: 10vh;
 }
+
+.backgroundDiv{
+    background: url("../static/img/conquer.jpg");
+    height: 100vh;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  
+}

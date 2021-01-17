@@ -5,7 +5,9 @@ import AddActivityButton from "../Input/add_activity_button"
 import ColorPicker from "../Modals/colorPicker"
 import CategoriesTable from "./categories_table"
 
-import {Button, Modal, Form, FormGroup, Spinner, Alert} from 'react-bootstrap';
+import LoadingPage from "../../containers/Loading/LoadingPage"
+
+import {Button, Modal, Form, FormGroup, Alert} from 'react-bootstrap';
 
 import API_Connection from '../../other/API_connection'
 
@@ -111,7 +113,7 @@ export default class CategoriesPage extends Component{
                         </Alert>)
                 }
             }
-            return(<Spinner animation="grow" className="loading-table"/>)
+            return(<LoadingPage />)
         }
         return(
             <div>

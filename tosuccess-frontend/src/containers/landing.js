@@ -12,15 +12,12 @@ import conquer from '../static/img/conquer.jpg';
 import '../style/activity_page.css';
 import '../style/landing.css';
 
-var sectionStyle = {
-    backgroundImage: 'url(' + conquer + ')'
-}
 
 
 export default function Landing(){
     console.log("Langing page")
     return(
-            <div className="page-contain" style={sectionStyle}>
+            <div className="page-contain" class="backgroundDiv">
                 <div className="content-left">
                     <h1 class="landingPage">Achieve it!</h1>
                     <p> The daily planner which structures your day in a revolutinary way</p>

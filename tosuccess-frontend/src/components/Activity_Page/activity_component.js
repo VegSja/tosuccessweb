@@ -4,8 +4,9 @@ import AddActivityButton from '../Input/add_activity_button';
 import DatePicker from "../Modals/date_picker"
 import CategoryDropdown from "../Modals/category_dropdown"
 import ToastMessage from '../toast_message'
+import LoadingPage from "../../containers/Loading/LoadingPage"
 
-import {Button, Modal, Form, Spinner, Alert} from 'react-bootstrap';
+import {Button, Modal, Form, Alert} from 'react-bootstrap';
 
 import {React, Component, createContext} from 'react';
 import { FormGroup } from '@material-ui/core';
@@ -62,6 +63,7 @@ class ActivityComponent extends Component{
         this.submitHandler = this.submitHandler.bind(this)
 
         this.api_connection = new API_Connection(this.state.backend_access_token, this.state.backend_refresh_token); //We still keep this object and pass it into the table. Still need it to post
+        localStorage.setItem('api', this.api_connection)
         this.dateHandler = new DateHandler();
     }
 
@@ -208,9 +210,7 @@ class ActivityComponent extends Component{
                 }
             }
             return(
-                <div>
-                    <Spinner animation="grow" className="loading-table" />
-                </div>
+                <LoadingPage />
             )
         }
         else{

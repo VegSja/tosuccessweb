@@ -4,6 +4,7 @@ export default class API_Connection {
     constructor(token, refreshToken){
         this.url_activities = "https://vegsja.pythonanywhere.com/activities/"
         this.url_categories = "https://vegsja.pythonanywhere.com/categories/"
+        this.url_stats = "https://vegsja.pythonanywhere.com/stats/"
         this.url_date = "https://vegsja.pythonanywhere.com/date/"
         this.url_refresh = "https://vegsja.pythonanywhere.com/refresh/"
         this.logoutUrl = "https://vegsja.pythonanywhere.com/logout/"
@@ -13,6 +14,7 @@ export default class API_Connection {
 
 
         this.categories = undefined;
+        this.stats = undefined;
 
         this.errorFromServer = false;
         this.errorMessage = null;
@@ -25,6 +27,7 @@ export default class API_Connection {
     handleError(errorMessage){
         this.errorMessage = errorMessage.request.statusText;
         this.errorFromServer = true;
+        this.sendRefreshToken()
         throw this.errorMessage;
     }
 
@@ -158,6 +161,21 @@ export default class API_Connection {
         })
         .catch((error) => {
             this.handleError(error)
+        })
+    }
+
+    async get_stats(start_date, end_date){
+        const res = await axios.get(this.url_stats + "?start_date=" + start_date + "&end_date=" + end_date, {
+            headers: {
+                "Authorization": `Bearer ${this.token}`
+            }
+        })
+        .then((res) => {
+            this.stats = res.data;
+            return(this.stats);
+        })
+        .catch((error) => {
+            this.handleError(error);
         })
     }
 

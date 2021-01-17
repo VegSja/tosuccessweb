@@ -2,6 +2,8 @@ import React, {useState} from "react";
 import PieChart from "../components/Stats_Page/Graphs/pie_chart";
 import LineChart from "../components/Stats_Page/Graphs/line_chart";
 
+import DatePicker from "../components/Modals/date_picker";
+
 import LoadingPage from "./Loading/LoadingPage"
 
 import API_Connection from '../other/API_connection'
@@ -12,6 +14,11 @@ export default function Stats(){
     //Using hooks to manage states
     const [loading, setLoading] = useState(true);
     const [statsHandler, setStatsHandler] = useState(null);
+
+    //For date picker
+    const [start_date_to_view, setStartDate] = useState(new Date());
+    const [end_date_to_view, setEndDate] = useState(new Date()); 
+
 
 
     var routeState = localStorage.getItem("routeState");
@@ -25,6 +32,19 @@ export default function Stats(){
     var data_list = []
 
     var connectionCounter = 0
+
+
+    const GET_date = () => {
+        api.get_current_date()
+        .then((response) => {
+            setStartDate((api.date.daynumber-7)%365)
+            setEndDate(api.date.daynumber)
+            getStats()
+        })
+        .catch(()=> {
+            GET_date()
+        });
+    }
 
     const getStats = () => {
         
@@ -43,6 +63,14 @@ export default function Stats(){
                 }
             })
         })
+    }
+
+    const onStartDateChanged = (e) => {
+        setStartDate(e.target.value)
+    }
+
+    const onEndDateChanged = (e) => {
+        setEndDate(e.target.value)
     }
 
     if(statsHandler === null){

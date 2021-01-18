@@ -12,12 +12,12 @@ import StatsHandler from '../other/StatsHandler'
 
 export default function Stats(){  
     //Using hooks to manage states
-    const [loading, setLoading] = useState(true);
-    const [statsHandler, setStatsHandler] = useState(null);
-
-    //For date picker
-    const [start_date_to_view, setStartDate] = useState(new Date());
-    const [end_date_to_view, setEndDate] = useState(new Date()); 
+    const [serverRequest, setServerRequest] = useState({
+        loading: true,
+        start_date : null,
+        end_date : null,
+        statsHandler : null,
+    });
 
 
 
@@ -37,21 +37,25 @@ export default function Stats(){
     const GET_date = () => {
         api.get_current_date()
         .then((response) => {
-            setStartDate((api.date.daynumber-7)%365)
-            setEndDate(api.date.daynumber)
-            getStats()
+            var today = api.date.daynumber 
+            var seven_days = (api.date.daynumber-7)%365
+            getStats(seven_days, today)
         })
         .catch(()=> {
             GET_date()
         });
     }
 
-    const getStats = () => {
+    const getStats = (start, end) => {
         
-        api.get_stats(10, 17)
+        api.get_stats(start, end)
         .then((response) => {
-            setStatsHandler(new StatsHandler(api.stats))
-            setLoading(false)
+            setServerRequest({
+                loading : false,
+                start_date : start,
+                end_date : end,
+                statsHandler : new StatsHandler(api.stats)
+            })
         })
         .catch((error) => {
             console.log("Caught error:", error)
@@ -65,16 +69,10 @@ export default function Stats(){
         })
     }
 
-    const onStartDateChanged = (e) => {
-        setStartDate(e.target.value)
-    }
+    const { loading, start_date, end_date, statsHandler } = serverRequest
 
-    const onEndDateChanged = (e) => {
-        setEndDate(e.target.value)
-    }
-
-    if(statsHandler === null){
-        getStats()
+    if(loading === true){
+        GET_date()
     }
 
     if(loading === true){

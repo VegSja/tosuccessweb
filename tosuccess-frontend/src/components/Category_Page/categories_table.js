@@ -4,6 +4,8 @@ import { Table} from 'react-bootstrap'
 import Category from './category'
 import sort_array_based_on_key from '../../other/sorting'
 
+import "../../style/Animation/tables.css"
+
 export default class CategoriesTable extends Component{
     constructor(props){
         super(props)
@@ -29,7 +31,7 @@ export default class CategoriesTable extends Component{
 
     render(){
         return(
-            <Table hover>
+            <Table hover className="category">
                 <thead>
                 </thead>
                 <tbody>

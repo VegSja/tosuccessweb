@@ -3,6 +3,7 @@ import { Route, Switch, HashRouter } from "react-router-dom";
 
 //Navbar import
 import NavBar from './components/navbar';
+import Footer from './components/footer';
 
 //Container imports
 import Landing from './containers/landing';

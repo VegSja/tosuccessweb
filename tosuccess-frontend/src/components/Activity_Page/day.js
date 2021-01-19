@@ -5,6 +5,8 @@ import {Table} from 'react-bootstrap';
 import ActivityCard from './Card/activityCard';
 import sort_array_based_on_key from '../../other/sorting'
 
+import "../../style/Animation/tables.css"
+
 export default class Day extends Component{
     constructor(props){
         super(props);
@@ -12,7 +14,7 @@ export default class Day extends Component{
 
     render(){
         return(
-            <Table>
+            <Table className="day">
             <thead>
                 <th>{this.props.date}</th>
             </thead>
@@ -30,7 +32,7 @@ export default class Day extends Component{
         for(const activity of activities_array){
             var category = activity.activity_category
             var currentColor = this.props.colorList[category]
-            items.push(<tr><ActivityCard api={this.props.api} activity_name={activity.activity_name} activity_category={category} color={currentColor} start_time={activity.minutes_after_midnight_start} end_time={activity.minutes_after_midnight_end} unique_id={activity.unique_id} /> </tr>);
+            items.push(<tr><ActivityCard class="activity" api={this.props.api} activity_name={activity.activity_name} activity_category={category} color={currentColor} start_time={activity.minutes_after_midnight_start} end_time={activity.minutes_after_midnight_end} unique_id={activity.unique_id} /> </tr>);
         }
         return items;
     }

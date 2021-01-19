@@ -5,9 +5,7 @@ th{
     text-align: center;
 }
 
-.activity-card{
-    margin-top: 1vw;
-}
+
 
 .add-button{
     position: absolute;
@@ -25,4 +23,10 @@ th{
     position: relative;
     bottom: 0;
     width: 100%;
+}
+
+.dropdown-text{
+    display: inline-block;
+    margin: auto;
+    overflow: auto;
 }

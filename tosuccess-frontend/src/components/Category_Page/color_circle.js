@@ -4,15 +4,13 @@ export default class ColorCircle extends Component{
     constructor(props){
         super(props);
         this.circleStyle = {
-            margin: "1vh",
+            "margin-right": "1vh",
             display:"inline-block",
             position:'relative',
             backgroundColor: this.props.color,
-            borderRadius: "50%",
-            width: this.props.size,
-            height: this.props.size,
-            left:0,
-            top:0,
+            borderRadius: 10,
+            width: 5,
+            height: 30,
         }
     }
 

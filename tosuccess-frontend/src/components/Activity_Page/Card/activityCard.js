@@ -9,6 +9,7 @@ import DeleteButton from '../../Input/delete_button'
 //Other imports
 import DateHandler from '../../../other/dateHandler';
 
+import "../../../style/Animation/tables.css";
 
 export default class ActivityCard extends Component{
     constructor(props){
@@ -18,7 +19,6 @@ export default class ActivityCard extends Component{
         this.end_time = dateHandler.timeConvert(this.props.end_time)
         this.unique_id = this.props.unique_id;
         this.api = this.props.api
-
     }
 
     deleteClick(){

@@ -14,7 +14,8 @@ export default class CategoryDisplay extends Component{
     render(){
         const containerStyle = {
             width : "fit-content",
-            borderRadius:"10%",
+            padding : "1",
+            borderRadius:"12px",
             backgroundColor: this.state.color,
             position: this.state.position_style,
 

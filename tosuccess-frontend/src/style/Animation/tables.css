@@ -1,0 +1,21 @@
+@keyframes appear {
+    from {opacity: 0;}
+    to {opacity: 1;}
+}
+
+
+.activity-card{
+    margin-top: 1vw;
+    animation-name: appear;
+    animation-duration: 1s;
+}
+
+.category{
+    animation-name: appear;
+    animation-duration: 1s;
+}
+
+.day{
+    animation-name: appear;
+    animation-duration: 1s;
+}

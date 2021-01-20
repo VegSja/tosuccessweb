@@ -13,6 +13,7 @@
 .category{
     animation-name: appear;
     animation-duration: 1s;
+    width: 50%;
 }
 
 .day{

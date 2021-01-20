@@ -11,6 +11,7 @@ export default class ColorCircle extends Component{
             borderRadius: 10,
             width: 5,
             height: 30,
+            "vertical-align":"middle"
         }
     }
 

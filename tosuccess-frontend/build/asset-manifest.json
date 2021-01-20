@@ -1,23 +1,24 @@
 {
   "files": {
-    "main.css": "/tosuccessweb/static/css/main.4db24c7d.chunk.css",
-    "main.js": "/tosuccessweb/static/js/main.afa2fbc3.chunk.js",
-    "main.js.map": "/tosuccessweb/static/js/main.afa2fbc3.chunk.js.map",
-    "runtime-main.js": "/tosuccessweb/static/js/runtime-main.2bc752e2.js",
-    "runtime-main.js.map": "/tosuccessweb/static/js/runtime-main.2bc752e2.js.map",
-    "static/js/2.17825c1f.chunk.js": "/tosuccessweb/static/js/2.17825c1f.chunk.js",
-    "static/js/2.17825c1f.chunk.js.map": "/tosuccessweb/static/js/2.17825c1f.chunk.js.map",
-    "static/js/3.c017441b.chunk.js": "/tosuccessweb/static/js/3.c017441b.chunk.js",
-    "static/js/3.c017441b.chunk.js.map": "/tosuccessweb/static/js/3.c017441b.chunk.js.map",
+    "main.css": "/tosuccessweb/static/css/main.da9f8d15.chunk.css",
+    "main.js": "/tosuccessweb/static/js/main.86767e0b.chunk.js",
+    "main.js.map": "/tosuccessweb/static/js/main.86767e0b.chunk.js.map",
+    "runtime-main.js": "/tosuccessweb/static/js/runtime-main.3052f51f.js",
+    "runtime-main.js.map": "/tosuccessweb/static/js/runtime-main.3052f51f.js.map",
+    "static/js/2.28bbec6d.chunk.js": "/tosuccessweb/static/js/2.28bbec6d.chunk.js",
+    "static/js/2.28bbec6d.chunk.js.map": "/tosuccessweb/static/js/2.28bbec6d.chunk.js.map",
+    "static/js/3.e58a2971.chunk.js": "/tosuccessweb/static/js/3.e58a2971.chunk.js",
+    "static/js/3.e58a2971.chunk.js.map": "/tosuccessweb/static/js/3.e58a2971.chunk.js.map",
     "index.html": "/tosuccessweb/index.html",
-    "static/css/main.4db24c7d.chunk.css.map": "/tosuccessweb/static/css/main.4db24c7d.chunk.css.map",
-    "static/js/2.17825c1f.chunk.js.LICENSE.txt": "/tosuccessweb/static/js/2.17825c1f.chunk.js.LICENSE.txt",
-    "static/media/landing.css": "/tosuccessweb/static/media/conquer.ece66679.jpg"
+    "static/css/main.da9f8d15.chunk.css.map": "/tosuccessweb/static/css/main.da9f8d15.chunk.css.map",
+    "static/js/2.28bbec6d.chunk.js.LICENSE.txt": "/tosuccessweb/static/js/2.28bbec6d.chunk.js.LICENSE.txt",
+    "static/media/landing.css": "/tosuccessweb/static/media/conquer.ece66679.jpg",
+    "static/media/delete.bed8c76b.svg": "/tosuccessweb/static/media/delete.bed8c76b.svg"
   },
   "entrypoints": [
-    "static/js/runtime-main.2bc752e2.js",
-    "static/js/2.17825c1f.chunk.js",
-    "static/css/main.4db24c7d.chunk.css",
-    "static/js/main.afa2fbc3.chunk.js"
+    "static/js/runtime-main.3052f51f.js",
+    "static/js/2.28bbec6d.chunk.js",
+    "static/css/main.da9f8d15.chunk.css",
+    "static/js/main.86767e0b.chunk.js"
   ]
 }

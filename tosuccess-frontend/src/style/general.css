@@ -6,3 +6,19 @@
     width: 100vh;
     float: bottom;
 }
+.category-name-table{
+    display: inline;
+    margin: auto;
+    overflow: auto;
+    vertical-align: middle;
+}
+.delete-button{
+    display: inline;
+    margin: auto;
+    overflow: auto;
+    margin-left: 20px;
+}
+.table-entry-category{
+    left: 0px;
+    text-align: left;
+}

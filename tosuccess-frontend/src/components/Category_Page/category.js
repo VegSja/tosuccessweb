@@ -3,6 +3,8 @@ import {React, Component} from 'react'
 import ColorCircle from './color_circle'
 import DeleteButton from '../Input/delete_button'
 
+import "../../style/general.css"
+
 export default class Category extends Component{
     constructor(props){
         super(props);
@@ -12,7 +14,13 @@ export default class Category extends Component{
             unique_id : this.props.unique_id,
         }
         this.api = this.props.api
+
+        this.categoryDisplayStyle = {
+            "diplay": "inline-block",
+        }
     }
+
+
 
     onDelete(){
         this.api.delete_category(this.state.unique_id)
@@ -30,10 +38,12 @@ export default class Category extends Component{
 
     render(){
         return(
-            <tr>
-                <th><ColorCircle color={this.state.color} size={"5vh"}/></th>
-                <th><h3>{this.state.name}</h3></th>
-                <th><DeleteButton onClick={() => this.onDelete()} position="relative"/></th>
+            <tr className="table-entry-category">
+                <th className="table-entry-category"><ColorCircle style={this.categoryDisplayStyle} color={this.state.color} size={"5vh"}/>
+                <p style={this.categoryDisplayStyle} className="category-name-table">{this.state.name}</p>
+                </th>
+                <th>
+                <DeleteButton style={this.categoryDisplayStyle} onClick={() => this.onDelete()} position="relative"/></th>
             </tr>
         )
     }

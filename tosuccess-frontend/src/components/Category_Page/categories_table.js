@@ -31,13 +31,15 @@ export default class CategoriesTable extends Component{
 
     render(){
         return(
-            <Table hover className="category">
-                <thead>
-                </thead>
-                <tbody>
-                        {this.render_categories()}
-                </tbody>
-            </Table>
+            <div className="category-div">
+                <Table hover className="category">
+                    <thead>
+                    </thead>
+                    <tbody>
+                            {this.render_categories()}
+                    </tbody>
+                </Table>
+            </div>
         )
     }
 }

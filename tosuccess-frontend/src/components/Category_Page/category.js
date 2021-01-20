@@ -39,7 +39,10 @@ export default class Category extends Component{
     render(){
         return(
             <tr className="table-entry-category">
-                <th className="table-entry-category"><ColorCircle style={this.categoryDisplayStyle} color={this.state.color} size={"5vh"}/>
+                <th className="table-entry-category">
+                    <ColorCircle style={this.categoryDisplayStyle} color={this.state.color} size={"5vh"}/>
+                </th>
+                <th>
                 <p style={this.categoryDisplayStyle} className="category-name-table">{this.state.name}</p>
                 </th>
                 <th>

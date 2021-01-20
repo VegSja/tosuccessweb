@@ -11,6 +11,8 @@ import {Button, Modal, Form, FormGroup, Alert} from 'react-bootstrap';
 
 import API_Connection from '../../other/API_connection'
 
+import "../../style/general.css"
+
 
 export default class CategoriesPage extends Component{
     constructor(props){

@@ -13,10 +13,14 @@
 .category{
     animation-name: appear;
     animation-duration: 1s;
-    width: 50%;
+
 }
 
 .day{
     animation-name: appear;
     animation-duration: 1s;
+}
+
+.category-div{
+    width: 50%;
 }

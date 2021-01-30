@@ -45,6 +45,9 @@ There are a few goals for this project. Firstly there are goals to reach a MVP, 
 # Images
 Keep in mind that the design of the website is still a work in progress, as the functionality of the website has been the main focus.
 
+## Navigation demo
+![Navigation gif](/website_imgs/navigation.gif)
+
 ## Central pages
 
 ### The landing page
@@ -55,6 +58,9 @@ Keep in mind that the design of the website is still a work in progress, as the 
 
 ### Categories page
 ![Categories page](/website_imgs/categories_filled.png)
+
+### Stats page
+![Stats page](/website_imgs/stats.png)
 
 ## Adding to database
 

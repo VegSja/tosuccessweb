@@ -37,8 +37,7 @@ There are a few goals for this project. Firstly there are goals to reach a MVP, 
     - Create page which displays these categories created by the user
 - Get statitics
     - Get statitics from backend
-    - Display statitics with different diagrams
-</s>
+    - Display statitics with different diagrams</s>
 - Improve UI
     - Animations
     - More work on colors and pictures

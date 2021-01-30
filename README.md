@@ -34,10 +34,11 @@ There are a few goals for this project. Firstly there are goals to reach a MVP, 
 - <s>Categorize activities
     - Create a system where the user can add different groups of activities
     - Let user choose a group for each activity in modal
-    - Create page which displays these categories created by the user</s>
+    - Create page which displays these categories created by the user
 - Get statitics
     - Get statitics from backend
     - Display statitics with different diagrams
+</s>
 - Improve UI
     - Animations
     - More work on colors and pictures
